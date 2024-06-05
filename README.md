@@ -1,1 +1,0 @@
-# pjatk-mas-project

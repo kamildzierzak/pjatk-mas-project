@@ -1,3 +1,8 @@
+// Notes
+// Lombok docs - https://projectlombok.org/features/
+//
+// Mapped
+
 package mas.ManagementSystem;
 
 import org.springframework.boot.SpringApplication;

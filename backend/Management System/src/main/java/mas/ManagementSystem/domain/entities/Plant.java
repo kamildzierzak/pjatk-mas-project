@@ -1,10 +1,10 @@
-package mas.ManagementSystem.model;
+package mas.ManagementSystem.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mas.ManagementSystem.model.types.PlantType;
+import mas.ManagementSystem.domain.types.PlantType;
 
 @Entity
 @Table(name = "plant")
@@ -15,16 +15,11 @@ public class Plant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
     private Long id;
 
+    @Column(unique = true)
     private String name;
     private String description;
     private PlantType type;
 
-    public Plant(String name, String description, PlantType type) {
-        this.name = name;
-        this.description = description;
-        this.type = type;
-    }
 }

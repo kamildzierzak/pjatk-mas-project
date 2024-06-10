@@ -1,4 +1,4 @@
-package mas.ManagementSystem.model.types;
+package mas.ManagementSystem.domain.types;
 
 public enum PlantType {
     HERB,

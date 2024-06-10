@@ -1,4 +1,4 @@
-package mas.ManagementSystem.model.roles;
+package mas.ManagementSystem.domain.entities.roles;
 
 import jakarta.persistence.Embeddable;
 

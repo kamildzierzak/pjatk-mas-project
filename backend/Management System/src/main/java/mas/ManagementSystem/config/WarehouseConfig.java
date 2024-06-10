@@ -1,41 +1,18 @@
 package mas.ManagementSystem.config;
 
-import mas.ManagementSystem.model.warehouse.Row;
-import mas.ManagementSystem.model.warehouse.Shelf;
-import mas.ManagementSystem.model.warehouse.Warehouse;
-import org.springframework.context.annotation.Bean;
+import mas.ManagementSystem.domain.entities.warehouse.Warehouse;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Configuration
-public class WarehouseConfig {
+public class WarehouseConfig implements CommandLineRunner {
 
-    @Bean
-    public Warehouse warehouse(List<Row> rows) {
-        return new Warehouse(rows);
+    public Warehouse warehouse() {
+        return new Warehouse();
     }
 
-    @Bean
-    public List<Row> rows() {
-        List<Row> rows = new ArrayList<>();
+    @Override
+    public void run(String... args) throws Exception {
 
-        for (int i = 0; i < 10; i++) {
-            rows.add(new Row(shelves()));
-        }
-
-        return rows;
-    }
-
-    @Bean
-    public List<Shelf> shelves() {
-        List<Shelf> shelves = new ArrayList<>();
-
-        for (int i = 0; i < 30; i++) {
-            shelves.add(new Shelf(i));
-        }
-
-        return shelves;
     }
 }

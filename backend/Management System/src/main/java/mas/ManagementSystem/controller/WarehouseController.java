@@ -1,18 +1,19 @@
 package mas.ManagementSystem.controller;
 
-import mas.ManagementSystem.model.warehouse.Warehouse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import mas.ManagementSystem.domain.entities.warehouse.Warehouse;
+import mas.ManagementSystem.service.WarehouseService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/warehouses")
 public class WarehouseController {
 
-    @Autowired
-    private Warehouse warehouse;
+    private final WarehouseService warehouseService;
 
-    @GetMapping("/warehouse")
-    public Warehouse getWarehouse() {
-        return warehouse;
+    public WarehouseController(final WarehouseService warehouseService) {
+        this.warehouseService = warehouseService;
     }
 }

@@ -1,14 +1,14 @@
-package mas.ManagementSystem.model;
+package mas.ManagementSystem.domain.entities.people;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mas.ManagementSystem.domain.entities.Address;
 
 @Entity
-@Table(name="person")
+@Table(name = "person")
 @NoArgsConstructor
 @Getter
 @Setter

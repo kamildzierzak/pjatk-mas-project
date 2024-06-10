@@ -1,4 +1,4 @@
-package mas.ManagementSystem.model;
+package mas.ManagementSystem.domain.entities.people;
 
 import jakarta.persistence.Embeddable;
 

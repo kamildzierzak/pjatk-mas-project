@@ -1,16 +1,22 @@
-package mas.ManagementSystem.model;
+package mas.ManagementSystem.domain.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mas.ManagementSystem.model.types.OrderStatusType;
-import mas.ManagementSystem.model.types.OrderType;
+import lombok.Setter;
+import mas.ManagementSystem.domain.types.OrderStatusType;
+import mas.ManagementSystem.domain.types.OrderType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "order")
+@Table(name = "\"Order\"")
+@AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Order {
 
     @Id
@@ -24,6 +30,7 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderType type;
+
     @Enumerated(EnumType.STRING)
     private OrderStatusType status;
 

@@ -1,4 +1,4 @@
-package mas.ManagementSystem.model;
+package mas.ManagementSystem.domain.entities.people;
 
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Embeddable
 @Getter
 @Setter
-public class Employee{
+public class Employee {
     private LocalDate startDate;
     private LocalDate endDate;
     private Double salary;

@@ -4,4 +4,5 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Warehouseman {
+//    TODO
 }

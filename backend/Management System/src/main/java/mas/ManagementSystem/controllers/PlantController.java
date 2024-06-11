@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/plants")
+@RequestMapping("/api/plants")
 public class PlantController {
 
     private final PlantService plantService;

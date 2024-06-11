@@ -1,21 +1,20 @@
 package mas.ManagementSystem.services;
 
+import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.entities.StockEntity;
 import mas.ManagementSystem.repositories.StockRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class StockService {
 
     private final StockRepository stockRepository;
 
-    public StockService(StockRepository stockRepository) {
-        this.stockRepository = stockRepository;
-    }
-
-    public Iterable<StockEntity> getAllStocks() {
+    public List<StockEntity> getAllStocks() {
         return stockRepository.findAll();
     }
 

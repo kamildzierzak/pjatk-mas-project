@@ -1,25 +1,18 @@
-package mas.ManagementSystem.domain.entities;
+package mas.ManagementSystem.domain.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mas.ManagementSystem.domain.types.PlantType;
 
-@Entity
-@Table(name = "plant")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-public class PlantEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+public class PlantDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
-    @Column(unique = true)
     private String name;
     private String description;
     private PlantType type;

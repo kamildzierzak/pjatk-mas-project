@@ -1,21 +1,20 @@
 package mas.ManagementSystem.services;
 
+import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.entities.warehouse.RackEntity;
 import mas.ManagementSystem.repositories.RackRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class RackService {
 
     private final RackRepository rackRepository;
 
-    public RackService(final RackRepository rackRepository) {
-        this.rackRepository = rackRepository;
-    }
-
-    public Iterable<RackEntity> getAllRacks() {
+    public List<RackEntity> getAllRacks() {
         return rackRepository.findAll();
     }
 

@@ -1,21 +1,20 @@
 package mas.ManagementSystem.services;
 
+import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.entities.warehouse.ShelfEntity;
 import mas.ManagementSystem.repositories.ShelfRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ShelfService {
 
     private final ShelfRepository shelfRepository;
 
-    public ShelfService(final ShelfRepository shelfRepository) {
-        this.shelfRepository = shelfRepository;
-    }
-
-    public Iterable<ShelfEntity> getAllShelves() {
+    public List<ShelfEntity> getAllShelves() {
         return shelfRepository.findAll();
     }
 

@@ -1,9 +1,9 @@
 package mas.ManagementSystem.repositories;
 
 import mas.ManagementSystem.domain.entities.PlantEntity;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PlantRepository extends CrudRepository<PlantEntity, Long> {
+public interface PlantRepository extends JpaRepository<PlantEntity, Long> {
 }

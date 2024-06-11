@@ -1,21 +1,20 @@
 package mas.ManagementSystem.services;
 
+import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.entities.warehouse.RowEntity;
 import mas.ManagementSystem.repositories.RowRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class RowService {
 
     private final RowRepository rowRepository;
 
-    public RowService(final RowRepository rowRepository) {
-        this.rowRepository = rowRepository;
-    }
-
-    public Iterable<RowEntity> getAllRows() {
+    public List<RowEntity> getAllRows() {
         return rowRepository.findAll();
     }
 

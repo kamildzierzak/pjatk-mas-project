@@ -14,11 +14,8 @@ import mas.ManagementSystem.domain.entities.warehouse.ShelfEntity;
 public class StockDto {
 
     private Long id;
-
     private Integer amount;
     private Double pricePerUnit;
-
     private ShelfEntity shelfEntity;
-
     private PlantEntity plantEntity;
 }

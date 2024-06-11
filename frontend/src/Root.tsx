@@ -1,5 +1,5 @@
 import { Link, useOutlet } from "react-router-dom";
-import Home from "./Home";
+import Home from "./routes/Home";
 
 const navigationLinks = [
   { name: "Home", href: "/" },

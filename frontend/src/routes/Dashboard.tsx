@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = {};
-
-export default function Dashboard({}: Props) {
+export default function Dashboard() {
   return (
     <div className="grid grid-cols-4 gap-5">
       {/* 4 grid components */}

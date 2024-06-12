@@ -21,7 +21,10 @@ public class PlantEntity {
 
     @Column(unique = true)
     private String name;
+
     private String description;
+
+    @Enumerated(EnumType.STRING)
     private PlantType type;
 
 }

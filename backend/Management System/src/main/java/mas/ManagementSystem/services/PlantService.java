@@ -16,34 +16,33 @@ public class PlantService {
 
     private final PlantRepository plantRepository;
 
+    public List<PlantEntity> getPlants() {
+        return plantRepository.findAll();
+    }
+
+    public Page<PlantEntity> getPlantsPage(Pageable pageable) {
+        return plantRepository.findAll(pageable);
+    }
+
+    public Optional<PlantEntity> getPlant(Long id) {
+        return plantRepository.findById(id);
+    }
+
     public PlantEntity createPlant(PlantEntity plantEntity) {
         return plantRepository.save(plantEntity);
     }
 
-    public List<PlantEntity> getAllPlants() {
-        return plantRepository.findAll();
-    }
-
-    public Page<PlantEntity> getPageOfPlants(Pageable pageable) {
-        return plantRepository.findAll(pageable);
-    }
-
-    public Optional<PlantEntity> getPlantById(Long id) {
-        return plantRepository.findById(id);
-    }
-
-    public boolean isPresent(Long id) {
+    public boolean isPlantPresent(Long id) {
         return plantRepository.existsById(id);
     }
-
 
     public PlantEntity updatePlant(PlantEntity plantEntity) {
         return plantRepository.save(plantEntity);
     }
 
-    public PlantEntity partialUpdatePlant(Long id, PlantEntity plantEntity) {
+    public PlantEntity updatePlantPartial(Long id, PlantEntity plantEntity) {
         plantEntity.setId(id);
-        
+
         return plantRepository.findById(id).map(existingPlant -> {
             Optional.ofNullable(plantEntity.getName()).ifPresent(existingPlant::setName);
             Optional.ofNullable(plantEntity.getDescription()).ifPresent(existingPlant::setDescription);
@@ -52,7 +51,7 @@ public class PlantService {
         }).orElseThrow(RuntimeException::new);
     }
 
-    public void delete(Long id) {
+    public void deletePlant(Long id) {
         plantRepository.deleteById(id);
     }
 

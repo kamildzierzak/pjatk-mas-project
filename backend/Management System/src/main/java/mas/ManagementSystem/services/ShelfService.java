@@ -14,14 +14,24 @@ public class ShelfService {
 
     private final ShelfRepository shelfRepository;
 
-    public List<ShelfEntity> getAllShelves() {
+    public List<ShelfEntity> getShelves() {
         return shelfRepository.findAll();
     }
 
-    public Optional<ShelfEntity> getShelfById(Long id) {
+    public Optional<ShelfEntity> getShelf(Long id) {
         return shelfRepository.findById(id);
     }
 
-//    TODO public Shelf saveShelf(Shelf shelf) {}
-//    TODO public void deleteShelf(Long id) {}
+    public ShelfEntity createShelf(ShelfEntity shelfEntity) {
+        return shelfRepository.save(shelfEntity);
+    }
+
+    public ShelfEntity updateShelf(ShelfEntity shelfEntity) {
+        return shelfRepository.save(shelfEntity);
+    }
+
+    public void deleteShelf(Long id) {
+        shelfRepository.deleteById(id);
+    }
+
 }

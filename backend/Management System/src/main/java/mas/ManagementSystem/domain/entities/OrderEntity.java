@@ -24,6 +24,7 @@ public class OrderEntity {
     private Long id;
 
     private LocalDateTime creationDate;
+
     private LocalDateTime completionDate;
 
     private BigDecimal amountToPay;

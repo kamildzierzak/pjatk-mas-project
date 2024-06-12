@@ -12,14 +12,18 @@ import java.util.Optional;
 @AllArgsConstructor
 public class WarehouseService {
 
+
     private final WarehouseRepository warehouseRepository;
 
-    public List<WarehouseEntity> getAllWarehouses() {
+    public WarehouseEntity createWarehouse(WarehouseEntity warehouseEntity) {
+        return warehouseRepository.save(warehouseEntity);
+    }
+
+    public List<WarehouseEntity> getWarehouses() {
         return warehouseRepository.findAll();
     }
 
-    public Optional<WarehouseEntity> getWarehouseById(Long id) {
+    public Optional<WarehouseEntity> getWarehouse(Long id) {
         return warehouseRepository.findById(id);
     }
-
 }

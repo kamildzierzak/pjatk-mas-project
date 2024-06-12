@@ -4,7 +4,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.entities.PlantEntity;
 import mas.ManagementSystem.domain.types.PlantType;
-import mas.ManagementSystem.repositories.PlantRepository;
+import mas.ManagementSystem.repositories.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -14,10 +14,17 @@ import java.util.List;
 @AllArgsConstructor
 public class DataInitializer {
 
+    private WarehouseRepository warehouseRepository;
+    private RowRepository rowRepository;
+    private RackRepository rackRepository;
+    private ShelfRepository shelfRepository;
     private PlantRepository plantRepository;
+    private StockRepository stockRepository;
 
     @PostConstruct
     public void init() {
+        
+//        Plants
         if (plantRepository.count() == 0) {
             List<PlantEntity> plants = Arrays.asList(
                     new PlantEntity(1L, "Basil", "A common herb", PlantType.HERB),

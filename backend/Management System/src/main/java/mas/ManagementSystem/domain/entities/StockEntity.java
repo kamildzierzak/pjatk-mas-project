@@ -20,7 +20,8 @@ public class StockEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private Integer amount;
+    private Integer quantity;
+
     private Double pricePerUnit;
 
     @ManyToOne(cascade = CascadeType.ALL)

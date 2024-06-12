@@ -29,24 +29,25 @@ public class ShelfEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     private RackEntity rackEntity;
 
+    //    aggregation (delete whole, leave parts untouched)
     @OneToMany(mappedBy = "shelfEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH})
     private ArrayList<StockEntity> stockEntity = new ArrayList<>();
 
-    private ShelfEntity(RackEntity rackEntity, int number) {
-        this.rackEntity = rackEntity;
-        this.number = number;
-    }
-
-    public static ShelfEntity createShelf(RackEntity rackEntity, int number) throws Exception {
-        if (rackEntity == null) {
-            throw new Exception("Cannot create shelf without a rack.");
-        }
-
-        ShelfEntity shelfEntity = new ShelfEntity(rackEntity, number);
-
-        rackEntity.addShelf(shelfEntity);
-
-        return shelfEntity;
-    }
+//    private ShelfEntity(RackEntity rackEntity, int number) {
+//        this.rackEntity = rackEntity;
+//        this.number = number;
+//    }
+//
+//    public static ShelfEntity createShelf(RackEntity rackEntity, int number) throws Exception {
+//        if (rackEntity == null) {
+//            throw new Exception("Cannot create shelf without a rack.");
+//        }
+//
+//        ShelfEntity shelfEntity = new ShelfEntity(rackEntity, number);
+//
+//        rackEntity.addShelf(shelfEntity);
+//
+//        return shelfEntity;
+//    }
 }

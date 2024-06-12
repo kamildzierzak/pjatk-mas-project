@@ -14,14 +14,19 @@ public class RackService {
 
     private final RackRepository rackRepository;
 
-    public List<RackEntity> getAllRacks() {
+    public List<RackEntity> getRacks() {
         return rackRepository.findAll();
     }
 
-    public Optional<RackEntity> getRackById(Long id) {
+    public Optional<RackEntity> getRack(Long id) {
         return rackRepository.findById(id);
     }
 
-//    TODO public Rack saveRack(Rack rack) {}
-//    TODO public void deleteRack(Long id) {}
+    public RackEntity saveRack(RackEntity rackEntity) {
+        return rackRepository.save(rackEntity);
+    }
+
+    public void deleteRack(Long id) {
+        rackRepository.deleteById(id);
+    }
 }

@@ -14,14 +14,24 @@ public class RowService {
 
     private final RowRepository rowRepository;
 
-    public List<RowEntity> getAllRows() {
+    public List<RowEntity> getRows() {
         return rowRepository.findAll();
     }
 
-    public Optional<RowEntity> getRowById(Long id) {
+    public Optional<RowEntity> getRow(Long id) {
         return rowRepository.findById(id);
     }
 
-//    TODO public Row saveRow(Row row) {}
-//    TODO public void deleteRow(Long id) {}
+    public RowEntity createRow(RowEntity rowEntity) {
+        return rowRepository.save(rowEntity);
+    }
+
+    public RowEntity updateRow(RowEntity rowEntity) {
+        return rowRepository.save(rowEntity);
+    }
+
+    public void deleteRow(Long id) {
+        rowRepository.deleteById(id);
+    }
+
 }

@@ -11,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
@@ -23,6 +21,27 @@ public class PlantController {
     private final PlantService plantService;
     private PlantMapper plantMapper;
 
+//    @GetMapping
+//    public List<PlantDto> getPlants() {
+//        List<PlantEntity> plantEntities = plantService.getAllPlants();
+//        return plantEntities.stream().map(plantMapper::mapTo).collect(Collectors.toList());
+//    }
+
+    @GetMapping
+    public Page<PlantDto> getPlantsPage(Pageable pageable) {
+        Page<PlantEntity> plants = plantService.getPlantsPage(pageable);
+        return plants.map(plantMapper::mapTo);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PlantDto> getPlant(@PathVariable("id") Long id) {
+        Optional<PlantEntity> foundPlant = plantService.getPlant(id);
+        return foundPlant.map(plantEntity -> {
+            PlantDto plantDto = plantMapper.mapTo(plantEntity);
+            return new ResponseEntity<>(plantDto, HttpStatus.OK);
+        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @PostMapping
     public ResponseEntity<PlantDto> createPlant(@RequestBody PlantDto plantDto) {
         PlantEntity plantEntity = plantMapper.mapFrom(plantDto);
@@ -30,25 +49,10 @@ public class PlantController {
         return new ResponseEntity<>(plantMapper.mapTo(savedPlantEntity), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public Page<PlantDto> getPlants(Pageable pageable) {
-        Page<PlantEntity> plants = plantService.getPageOfPlants(pageable);
-        return plants.map(plantMapper::mapTo);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<PlantDto> getPlantById(@PathVariable("id") Long id) {
-        Optional<PlantEntity> foundPlant = plantService.getPlantById(id);
-        return foundPlant.map(plantEntity -> {
-            PlantDto plantDto = plantMapper.mapTo(plantEntity);
-            return new ResponseEntity<>(plantDto, HttpStatus.OK);
-        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<PlantDto> updatePlant(@PathVariable("id") Long id, @RequestBody PlantDto plantDto) {
-        if (!plantService.isPresent(id)) {
+        if (!plantService.isPlantPresent(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -59,19 +63,19 @@ public class PlantController {
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<PlantDto> partialUpdatePlant(@PathVariable("id") Long id, @RequestBody PlantDto plantDto) {
-        if (!plantService.isPresent(id)) {
+    public ResponseEntity<PlantDto> updatePlantPartial(@PathVariable("id") Long id, @RequestBody PlantDto plantDto) {
+        if (!plantService.isPlantPresent(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         PlantEntity plantEntity = plantMapper.mapFrom(plantDto);
-        PlantEntity partiallyUpdatedPlantEntity = plantService.partialUpdatePlant(id, plantEntity);
+        PlantEntity partiallyUpdatedPlantEntity = plantService.updatePlantPartial(id, plantEntity);
         return new ResponseEntity<>(plantMapper.mapTo(partiallyUpdatedPlantEntity), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity deletePlant(@PathVariable("id") Long id) {
-        plantService.delete(id);
+        plantService.deletePlant(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

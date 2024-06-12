@@ -1,12 +1,12 @@
 package mas.ManagementSystem.domain.entities.warehouse;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,13 +26,15 @@ public class WarehouseEntity {
 
     private String name;
 
+    //    composition (delete all parts when whole is deleted)
     @OneToMany(mappedBy = "warehouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RowEntity> rowEntities = new ArrayList<>();
+    @Size(max = 10, message = "Maximum number of rows per warehouse is 10.")
+    private List<RowEntity> rowEntities;
 
-    public void addRow(RowEntity rowEntity) {
-        if (!rowEntities.contains(rowEntity)) {
-            rowEntities.add(rowEntity);
-        }
-    }
+//    public void addRow(RowEntity rowEntity) {
+//        if (!rowEntities.contains(rowEntity)) {
+//            rowEntities.add(rowEntity);
+//        }
+//    }
 
 }

@@ -14,15 +14,19 @@ public class StockService {
 
     private final StockRepository stockRepository;
 
-    public List<StockEntity> getAllStocks() {
+    public List<StockEntity> getStocks() {
         return stockRepository.findAll();
     }
 
-    public Optional<StockEntity> getStockById(Long id) {
+    public Optional<StockEntity> getStock(Long id) {
         return stockRepository.findById(id);
     }
 
     public StockEntity createStock(StockEntity stockEntity) {
+        return stockRepository.save(stockEntity);
+    }
+
+    public StockEntity updateStock(StockEntity stockEntity) {
         return stockRepository.save(stockEntity);
     }
 

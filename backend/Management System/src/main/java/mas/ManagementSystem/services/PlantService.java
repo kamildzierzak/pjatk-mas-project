@@ -3,6 +3,8 @@ package mas.ManagementSystem.services;
 import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.entities.PlantEntity;
 import mas.ManagementSystem.repositories.PlantRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,10 @@ public class PlantService {
         return plantRepository.findAll();
     }
 
+    public Page<PlantEntity> getPageOfPlants(Pageable pageable) {
+        return plantRepository.findAll(pageable);
+    }
+
     public Optional<PlantEntity> getPlantById(Long id) {
         return plantRepository.findById(id);
     }
@@ -37,7 +43,7 @@ public class PlantService {
 
     public PlantEntity partialUpdatePlant(Long id, PlantEntity plantEntity) {
         plantEntity.setId(id);
-
+        
         return plantRepository.findById(id).map(existingPlant -> {
             Optional.ofNullable(plantEntity.getName()).ifPresent(existingPlant::setName);
             Optional.ofNullable(plantEntity.getDescription()).ifPresent(existingPlant::setDescription);

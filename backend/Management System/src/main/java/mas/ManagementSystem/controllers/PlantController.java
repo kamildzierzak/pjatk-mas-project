@@ -5,6 +5,8 @@ import mas.ManagementSystem.domain.dto.PlantDto;
 import mas.ManagementSystem.domain.entities.PlantEntity;
 import mas.ManagementSystem.mappers.PlantMapper;
 import mas.ManagementSystem.services.PlantService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +31,9 @@ public class PlantController {
     }
 
     @GetMapping
-    public List<PlantDto> getPlants() {
-        List<PlantEntity> plants = plantService.getAllPlants();
-        return plants.stream().map(
-                plantMapper::mapTo
-        ).collect(Collectors.toList());
+    public Page<PlantDto> getPlants(Pageable pageable) {
+        Page<PlantEntity> plants = plantService.getPageOfPlants(pageable);
+        return plants.map(plantMapper::mapTo);
     }
 
     @GetMapping("/{id}")

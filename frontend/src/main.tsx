@@ -4,7 +4,7 @@ import Root from "./Root.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/errors/ErrorPage.tsx";
-import Plants from "./components/ui/Plants.tsx";
+import Plants from "./routes/Plants.tsx";
 import Dashboard from "./routes/Dashboard.tsx";
 
 const router = createBrowserRouter([

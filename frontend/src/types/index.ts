@@ -12,3 +12,8 @@ export type Plant = {
   description: string;
   type: PlantType;
 };
+
+export type PageablePlant = {
+  page?: number;
+  size?: number;
+};

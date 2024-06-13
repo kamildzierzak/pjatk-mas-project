@@ -1,6 +1,6 @@
 package mas.ManagementSystem.repositories;
 
-import mas.ManagementSystem.domain.entities.warehouse.WarehouseEntity;
+import mas.ManagementSystem.domain.entities.storage.WarehouseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

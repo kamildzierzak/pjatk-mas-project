@@ -1,4 +1,4 @@
-package mas.ManagementSystem.domain.entities.warehouse;
+package mas.ManagementSystem.domain.entities.storage;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -29,12 +29,7 @@ public class WarehouseEntity {
     //    composition (delete all parts when whole is deleted)
     @OneToMany(mappedBy = "warehouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     @Size(max = 10, message = "Maximum number of rows per warehouse is 10.")
-    private List<RowEntity> rowEntities;
+    private List<RowEntity> rows;
 
-//    public void addRow(RowEntity rowEntity) {
-//        if (!rowEntities.contains(rowEntity)) {
-//            rowEntities.add(rowEntity);
-//        }
-//    }
-
+//    TODO COUNT AVAILABLE SPACE AT THIS WAREHOUSE
 }

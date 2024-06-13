@@ -2,7 +2,7 @@ package mas.ManagementSystem.controllers;
 
 import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.dto.StockDto;
-import mas.ManagementSystem.domain.entities.StockEntity;
+import mas.ManagementSystem.domain.entities.storage.StockEntity;
 import mas.ManagementSystem.mappers.Mapper;
 import mas.ManagementSystem.services.StockService;
 import org.springframework.web.bind.annotation.PostMapping;

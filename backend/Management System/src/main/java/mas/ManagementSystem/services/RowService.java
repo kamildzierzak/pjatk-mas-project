@@ -1,7 +1,7 @@
 package mas.ManagementSystem.services;
 
 import lombok.AllArgsConstructor;
-import mas.ManagementSystem.domain.entities.warehouse.RowEntity;
+import mas.ManagementSystem.domain.entities.storage.RowEntity;
 import mas.ManagementSystem.repositories.RowRepository;
 import org.springframework.stereotype.Service;
 

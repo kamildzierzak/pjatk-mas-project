@@ -1,7 +1,7 @@
 package mas.ManagementSystem.services;
 
 import lombok.AllArgsConstructor;
-import mas.ManagementSystem.domain.entities.warehouse.RackEntity;
+import mas.ManagementSystem.domain.entities.storage.RackEntity;
 import mas.ManagementSystem.repositories.RackRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class RackService {
         return rackRepository.findById(id);
     }
 
-    public RackEntity saveRack(RackEntity rackEntity) {
+    public RackEntity createRack(RackEntity rackEntity) {
         return rackRepository.save(rackEntity);
     }
 

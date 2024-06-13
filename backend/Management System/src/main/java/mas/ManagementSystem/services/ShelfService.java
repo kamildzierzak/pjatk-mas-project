@@ -1,7 +1,7 @@
 package mas.ManagementSystem.services;
 
 import lombok.AllArgsConstructor;
-import mas.ManagementSystem.domain.entities.warehouse.ShelfEntity;
+import mas.ManagementSystem.domain.entities.storage.ShelfEntity;
 import mas.ManagementSystem.repositories.ShelfRepository;
 import org.springframework.stereotype.Service;
 

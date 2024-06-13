@@ -1,7 +1,7 @@
 package mas.ManagementSystem.services;
 
 import lombok.AllArgsConstructor;
-import mas.ManagementSystem.domain.entities.StockEntity;
+import mas.ManagementSystem.domain.entities.storage.StockEntity;
 import mas.ManagementSystem.repositories.StockRepository;
 import org.springframework.stereotype.Service;
 

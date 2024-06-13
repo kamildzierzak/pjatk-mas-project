@@ -42,12 +42,12 @@ public class PlantEntity {
     private List<StockItemEntity> stockItems;
 
     @Transient
-    private Double getSquareBase() {
+    public Double getSquareBase() {
         return maxWidth * maxDepth;
     }
 
     @Transient
-    private Double getCubicArea() {
+    public Double getCubicArea() {
         return getSquareBase() * maxHeight;
     }
 

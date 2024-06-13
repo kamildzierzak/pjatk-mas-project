@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mas.ManagementSystem.domain.entities.AddressEntity;
+import mas.ManagementSystem.domain.entities.OrderActionEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "person")
@@ -23,36 +27,31 @@ public class PersonEntity {
 
     private String lastName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "fk_addressEntity")
     private AddressEntity addressEntity;
 
     private String phone;
 
     private String email;
 
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "fk_supplierEntity")
     @Nullable
     private SupplierEntity supplierEntity;
 
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "fk_customerEntity")
     @Nullable
     private CustomerEntity customerEntity;
 
-    @Embedded
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "fk_employeeEntity")
     @Nullable
     private EmployeeEntity employeeEntity;
 
-    public void becomeSupplier() {
-        this.supplierEntity = new SupplierEntity();
-    }
-
-    public void becomeCustomer() {
-        this.customerEntity = new CustomerEntity();
-    }
-
-    public void becomeEmployee() {
-        this.employeeEntity = new EmployeeEntity();
-    }
+    @OneToMany(mappedBy = "personEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderActionEntity> actionsPerformedOn = new ArrayList<>();
 
 }

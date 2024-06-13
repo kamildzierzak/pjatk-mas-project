@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,20 +29,20 @@ public class StockEntity {
     private ShelfEntity shelfEntity;
 
     @OneToMany(mappedBy = "stockEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<StockItemEntity> stockItems;
+    private List<StockItemEntity> stockItems = new ArrayList<>();
 
     @Transient
     public Double getTotalPrice() {
-        return getQuantity() * pricePerUnit;
+        return getTotalQuantity() * pricePerUnit;
     }
 
     @Transient
-    public Integer getQuantity() {
+    public Integer getTotalQuantity() {
         return stockItems.size();
     }
 
     @Transient
-    public Double getWeight() {
+    public Double getTotalWeight() {
         Double totalWeight = 0.0;
 
         for (StockItemEntity item : stockItems) {

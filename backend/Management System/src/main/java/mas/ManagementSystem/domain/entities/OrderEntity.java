@@ -5,11 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mas.ManagementSystem.domain.entities.people.CustomerEntity;
+import mas.ManagementSystem.domain.entities.people.SupplierEntity;
+import mas.ManagementSystem.domain.entities.storage.StockItemEntity;
 import mas.ManagementSystem.domain.types.OrderStatusType;
 import mas.ManagementSystem.domain.types.OrderType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "\"order\"")
@@ -27,7 +32,7 @@ public class OrderEntity {
 
     private LocalDateTime completionDate;
 
-    private BigDecimal amountToPay;
+    private BigDecimal priceToPay;
 
     @Enumerated(EnumType.STRING)
     private OrderType type;
@@ -35,4 +40,18 @@ public class OrderEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatusType status;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_customerEntity", nullable = true)
+    private CustomerEntity customerEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_supplierEntity", nullable = true)
+    private SupplierEntity supplierEntity;
+
+    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("time DESC")
+    private List<OrderActionEntity> actionsPerformedBy = new ArrayList<>();
+
+    @OneToMany(mappedBy = "orderEntity")
+    private List<StockItemEntity> content;
 }

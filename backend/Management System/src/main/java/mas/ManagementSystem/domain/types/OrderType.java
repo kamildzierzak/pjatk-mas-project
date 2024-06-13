@@ -1,6 +1,6 @@
 package mas.ManagementSystem.domain.types;
 
 public enum OrderType {
-    BUYING,
-    SELLING
+    BUYING_FROM,
+    SELLING_TO,
 }

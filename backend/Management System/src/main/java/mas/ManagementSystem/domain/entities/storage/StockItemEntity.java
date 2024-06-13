@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mas.ManagementSystem.domain.entities.OrderEntity;
 import mas.ManagementSystem.domain.entities.PlantEntity;
 
 @Entity
@@ -28,12 +29,16 @@ public class StockItemEntity {
     private Double weight;
 
     @ManyToOne
-    @JoinColumn(name = "fk_stockEntity")
+    @JoinColumn(name = "fk_stockEntity", nullable = false)
     private StockEntity stockEntity;
 
     @ManyToOne
-    @JoinColumn(name = "fk_plantEntity")
+    @JoinColumn(name = "fk_plantEntity", nullable = false)
     private PlantEntity plantEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_orderEntity")
+    private OrderEntity orderEntity;
 
     @Transient
     private Double getSquareBase() {

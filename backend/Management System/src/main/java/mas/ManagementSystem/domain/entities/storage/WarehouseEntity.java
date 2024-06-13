@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,10 +27,10 @@ public class WarehouseEntity {
 
     private String name;
 
-    //    composition (delete all parts when whole is deleted)
     @OneToMany(mappedBy = "warehouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     @Size(max = 10, message = "Maximum number of rows per warehouse is 10.")
-    private List<RowEntity> rows;
+    private List<RowEntity> rows = new ArrayList<>();
 
 //    TODO COUNT AVAILABLE SPACE AT THIS WAREHOUSE
+//
 }

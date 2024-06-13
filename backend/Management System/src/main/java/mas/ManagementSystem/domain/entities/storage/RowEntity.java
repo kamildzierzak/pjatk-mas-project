@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,13 +27,12 @@ public class RowEntity {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "fk_warehouseEntity")
+    @JoinColumn(name = "fk_warehouseEntity", nullable = false)
     private WarehouseEntity warehouseEntity;
 
-    //    composition (delete all parts when whole is deleted)
     @OneToMany(mappedBy = "rowEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     @Size(max = 30, message = "Maximum number of racks per row is 30.")
-    private List<RackEntity> racks;
+    private List<RackEntity> racks = new ArrayList<>();
 
 //    TODO COUNT AVAILABLE SPACE AT THIS ROW
 }

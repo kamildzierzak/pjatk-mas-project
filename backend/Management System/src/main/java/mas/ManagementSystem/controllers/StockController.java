@@ -19,8 +19,8 @@ public class StockController {
 
     private Mapper<StockEntity, StockDto> stockMapper;
 
-//    getStocks
-//    getStockById
+//    TODO getStocks
+//    TODO getStockById
 
     @PostMapping
     public StockDto createStock(@RequestBody StockDto stock) {
@@ -29,6 +29,6 @@ public class StockController {
         return stockMapper.mapTo(savedStockEntity);
     }
 
-//    updateStock
-//    deleteStock
+//    TODO updateStock
+//    TODO deleteStock
 }

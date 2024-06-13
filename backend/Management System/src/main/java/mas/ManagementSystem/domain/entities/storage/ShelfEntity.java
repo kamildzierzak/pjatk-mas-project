@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,12 +27,12 @@ public class ShelfEntity {
     private Integer number;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_rackEntity")
+    @JoinColumn(name = "fk_rackEntity", nullable = false)
     private RackEntity rackEntity;
 
     @OneToMany(mappedBy = "shelfEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH})
-    private List<StockEntity> stocks;
+    private List<StockEntity> stocks = new ArrayList<>();
 
     @Transient
     public static Integer getSquareBase() {

@@ -27,6 +27,8 @@
 * [Pagination and Sorting using Spring Data JPA](https://www.baeldung.com/spring-data-jpa-pagination-sorting)
 * [Composition vs. Inheritance with JPA and Hibernate](https://thorben-janssen.com/composition-vs-inheritance-jpa-hibernate/#using-composition-with-jpa-and-hibernate)
 * [Map Associations with JPA and Hibernate – The Ultimate Guide](https://thorben-janssen.com/ultimate-guide-association-mappings-jpa-hibernate/#manyToOne)
+* [Mapping Collections with Hibernate and JPA](https://thorben-janssen.com/collections-hibernate-jpa/)
+* [How to map an association as a java.util.Map](https://thorben-janssen.com/map-association-java-util-map/)
 * [API Design Guide](https://cloud.google.com/apis/design)
 
 ---

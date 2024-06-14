@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mas.ManagementSystem.domain.entities.people.CustomerEntity;
 import mas.ManagementSystem.domain.entities.people.SupplierEntity;
-import mas.ManagementSystem.domain.entities.storage.StockItemEntity;
+import mas.ManagementSystem.domain.entities.storage.BatchEntity;
 import mas.ManagementSystem.domain.types.OrderStatusType;
 import mas.ManagementSystem.domain.types.OrderType;
 
@@ -53,5 +53,5 @@ public class OrderEntity {
     private List<OrderActionEntity> actionsPerformedBy = new ArrayList<>();
 
     @OneToMany(mappedBy = "orderEntity")
-    private List<StockItemEntity> content;
+    private List<BatchEntity> content;
 }

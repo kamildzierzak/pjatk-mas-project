@@ -2,23 +2,23 @@ package mas.ManagementSystem.mappers;
 
 import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.dto.StockDto;
-import mas.ManagementSystem.domain.entities.storage.StockEntity;
+import mas.ManagementSystem.domain.entities.storage.BatchEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class StockMapper implements Mapper<StockEntity, StockDto> {
+public class StockMapper implements Mapper<BatchEntity, StockDto> {
 
     private final ModelMapper modelMapper;
-    
+
     @Override
-    public StockDto mapTo(StockEntity stockEntity) {
-        return modelMapper.map(stockEntity, StockDto.class);
+    public StockDto mapTo(BatchEntity batchEntity) {
+        return modelMapper.map(batchEntity, StockDto.class);
     }
 
     @Override
-    public StockEntity mapFrom(StockDto stockDto) {
-        return modelMapper.map(stockDto, StockEntity.class);
+    public BatchEntity mapFrom(StockDto stockDto) {
+        return modelMapper.map(stockDto, BatchEntity.class);
     }
 }

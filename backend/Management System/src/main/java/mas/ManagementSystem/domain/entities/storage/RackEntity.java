@@ -33,6 +33,7 @@ public class RackEntity {
     @Size(max = 3, message = "Maximum number of shelves per rack is 3.")
     private List<ShelfEntity> shelves = new ArrayList<>();
 
+    //    TODO getLocation()
     //    TODO COUNT AVAILABLE SPACE AT THIS RACK
 
 }

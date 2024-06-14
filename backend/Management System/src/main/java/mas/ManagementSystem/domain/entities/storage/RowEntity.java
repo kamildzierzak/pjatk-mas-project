@@ -34,5 +34,6 @@ public class RowEntity {
     @Size(max = 30, message = "Maximum number of racks per row is 30.")
     private List<RackEntity> racks = new ArrayList<>();
 
-//    TODO COUNT AVAILABLE SPACE AT THIS ROW
+    //    TODO getLocation()
+    //    TODO COUNT AVAILABLE SPACE AT THIS ROW
 }

@@ -2,7 +2,7 @@ package mas.ManagementSystem.controllers;
 
 import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.dto.StockDto;
-import mas.ManagementSystem.domain.entities.storage.StockEntity;
+import mas.ManagementSystem.domain.entities.storage.BatchEntity;
 import mas.ManagementSystem.mappers.Mapper;
 import mas.ManagementSystem.services.StockService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,16 +17,16 @@ public class StockController {
 
     private StockService stockService;
 
-    private Mapper<StockEntity, StockDto> stockMapper;
+    private Mapper<BatchEntity, StockDto> stockMapper;
 
 //    TODO getStocks
 //    TODO getStockById
 
     @PostMapping
     public StockDto createStock(@RequestBody StockDto stock) {
-        StockEntity stockEntity = stockMapper.mapFrom(stock);
-        StockEntity savedStockEntity = stockService.createStock(stockEntity);
-        return stockMapper.mapTo(savedStockEntity);
+        BatchEntity batchEntity = stockMapper.mapFrom(stock);
+        BatchEntity savedBatchEntity = stockService.createStock(batchEntity);
+        return stockMapper.mapTo(savedBatchEntity);
     }
 
 //    TODO updateStock

@@ -1,7 +1,7 @@
 package mas.ManagementSystem.services;
 
 import lombok.AllArgsConstructor;
-import mas.ManagementSystem.domain.entities.storage.StockEntity;
+import mas.ManagementSystem.domain.entities.storage.BatchEntity;
 import mas.ManagementSystem.repositories.StockRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,23 +14,23 @@ public class StockService {
 
     private final StockRepository stockRepository;
 
-    public List<StockEntity> getStocks() {
+    public List<BatchEntity> getStocks() {
         return stockRepository.findAll();
     }
 
-    public Optional<StockEntity> getStock(Long id) {
+    public Optional<BatchEntity> getStock(Long id) {
         return stockRepository.findById(id);
     }
 
-    public StockEntity createStock(StockEntity stockEntity) {
-        return stockRepository.save(stockEntity);
+    public BatchEntity createStock(BatchEntity batchEntity) {
+        return stockRepository.save(batchEntity);
     }
 
-    public StockEntity updateStock(StockEntity stockEntity) {
-        return stockRepository.save(stockEntity);
+    public BatchEntity updateStock(BatchEntity batchEntity) {
+        return stockRepository.save(batchEntity);
     }
 
-    public void deleteStock(StockEntity stockEntity) {
-        stockRepository.delete(stockEntity);
+    public void deleteStock(BatchEntity batchEntity) {
+        stockRepository.delete(batchEntity);
     }
 }

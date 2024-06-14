@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mas.ManagementSystem.domain.entities.storage.StockItemEntity;
+import mas.ManagementSystem.domain.entities.storage.BatchEntity;
 import mas.ManagementSystem.domain.types.PlantType;
 
 import java.util.List;
@@ -27,28 +27,30 @@ public class PlantEntity {
 
     private String description;
 
-    private Double maxWidth;
-
-    private Double maxHeight;
-
-    private Double maxDepth;
-
-    private Double maxWeight;
-
     @Enumerated(EnumType.STRING)
     private PlantType type;
 
+    private Double maxPlantWidth;
+
+    private Double maxPlantHeight;
+
+    private Double maxPlantDepth;
+
+    private Double maxPlantWeight;
+
+    private Integer maximumQuantityInBatch;
+
     @OneToMany(mappedBy = "plantEntity")
-    private List<StockItemEntity> stockItems;
+    private List<BatchEntity> batches;
 
     @Transient
     public Double getSquareBase() {
-        return maxWidth * maxDepth;
+        return maxPlantWidth * maxPlantDepth;
     }
 
     @Transient
     public Double getCubicArea() {
-        return getSquareBase() * maxHeight;
+        return getSquareBase() * maxPlantHeight;
     }
 
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PlantElement from "../components/ui/PlantElement";
-import { getPlants } from "../api/plantService";
+import { getPlants } from "../services/plantService";
 import { PageablePlant } from "../types";
 
 export default function Plants() {
@@ -10,9 +10,9 @@ export default function Plants() {
   const getAllPlants = async (page = 0, size = 15) => {
     try {
       setCurrentPage(page);
+
       const { data } = await getPlants(page, size);
       setData(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -36,7 +36,7 @@ export default function Plants() {
           className="w-full p-2 border rounded shadow-md"
           onChange={search}
         />
-        <button className="bg-primary border min-w-32 p-2 hover:scale-110 hover:bg-secondary transition-all">
+        <button className="bg-primary border min-w-32 p-2 hover:scale-105 hover:bg-secondary transition-all">
           Add new
         </button>
       </div>

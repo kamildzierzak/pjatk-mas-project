@@ -1,5 +1,5 @@
 import axios from "axios";
-import { PageablePlant, Plant } from "../types";
+import { Plant } from "../types";
 
 const API_URL = "http://localhost:8080/api/plants";
 

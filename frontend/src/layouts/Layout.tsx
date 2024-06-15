@@ -1,5 +1,4 @@
-import { Link, useOutlet } from "react-router-dom";
-import Home from "./routes/Home";
+import { Link } from "react-router-dom";
 
 const navigationLinks = [
   { name: "Home", href: "/" },
@@ -7,16 +6,14 @@ const navigationLinks = [
   { name: "Plants", href: "/plants" },
 ];
 
-export default function Root() {
-  const outlet = useOutlet();
-
+export default function Layout() {
   return (
     <div className="max-w-screen-2xl mx-auto p-5">
       <div className="flex flex-col gap-5">
         <nav className="p-5 border flex flex-col gap-3">
           <div>
             <h1 className="text-xl font-semibold">
-              <Link to="/">WarManSystem</Link>
+              <Link to="/">EasyWare</Link>
             </h1>
           </div>
           <ul className="flex lg:hidden flex-col gap-1">
@@ -37,7 +34,6 @@ export default function Root() {
               ))}
             </ul>
           </div>
-          <div className="w-full py-10 px-5 border">{outlet || <Home />}</div>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ export async function savePlant(plant: Plant) {
   return await axios.post(API_URL, plant);
 }
 
-export async function getPlants(page = 0, size = 15) {
+export async function getPlants(page = 0, size = 10) {
   return await axios.get(`${API_URL}?page=${page}&size=${size}`);
 }
 

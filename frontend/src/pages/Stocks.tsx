@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import PlantElement from "../components/ui/PlantElement";
 import { getPlants } from "../services/plantService";
-import { PageablePlant } from "../types";
 
-export default function Plants() {
+export default function Stocks() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const getAllPlants = async (page = 0, size = 15) => {
+  const getAllPlants = async (page = 0, size = 20) => {
     try {
       setCurrentPage(page);
 

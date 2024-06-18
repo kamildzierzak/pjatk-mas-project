@@ -52,5 +52,5 @@ public class PlantEntity {
     public Double getCubicArea() {
         return getSquareBase() * maxPlantHeight;
     }
-
+    
 }

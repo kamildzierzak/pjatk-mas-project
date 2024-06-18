@@ -11,7 +11,7 @@ import mas.ManagementSystem.domain.entities.storage.ShelfEntity;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StockDto {
+public class BatchDto {
 
     private Long id;
     private Integer amount;

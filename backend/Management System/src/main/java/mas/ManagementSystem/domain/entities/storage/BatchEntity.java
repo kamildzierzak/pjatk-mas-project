@@ -35,7 +35,7 @@ public class BatchEntity {
     private ShelfEntity shelfEntity;
 
     @ManyToOne
-    @JoinColumn(name = "fk_orderEntity")
+    @JoinColumn(name = "fk_orderEntity", nullable = true)
     private OrderEntity orderEntity;
 
     @Transient

@@ -48,7 +48,7 @@ public class OrderEntity {
     @JoinColumn(name = "fk_supplierEntity", nullable = true)
     private SupplierEntity supplierEntity;
 
-    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "orderEntity")
     @OrderBy("time DESC")
     private List<OrderActionEntity> actionsPerformedBy = new ArrayList<>();
 

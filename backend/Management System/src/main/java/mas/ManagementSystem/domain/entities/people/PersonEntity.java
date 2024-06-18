@@ -51,7 +51,7 @@ public class PersonEntity {
     @Nullable
     private EmployeeEntity employeeEntity;
 
-    @OneToMany(mappedBy = "personEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "personEntity")
     private List<OrderActionEntity> actionsPerformedOn = new ArrayList<>();
 
 }

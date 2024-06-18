@@ -23,12 +23,12 @@ public class ShelfEntity {
 
     private Integer number;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "fk_rackEntity", nullable = false)
     private RackEntity rackEntity;
 
     @OneToOne
-    @JoinColumn(name = "fk_batchEntity")
+    @JoinColumn(name = "fk_batchEntity", nullable = true)
     private BatchEntity batchEntity;
 
     @Transient

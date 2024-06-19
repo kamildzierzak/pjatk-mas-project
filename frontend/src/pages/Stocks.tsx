@@ -106,19 +106,33 @@ export default function Stocks() {
       {data && data.content?.length > 0 && (
         <div className="w-full min-h-10 flex justify-center mb-4">
           {data.totalPages > 1 && (
-            <div className="fle gap-1 join text-white font-semibold">
-              {currentPage !== 0 && (
+            <div className="flex gap-1 join text-white font-semibold">
+              {currentPage !== 0 ? (
                 <button
                   onClick={() => getAllPlants(currentPage - 1)}
-                  className="min-w-24 join-item bg-primary p-2 rounded-lg"
+                  className="min-w-24 join-item bg-primary p-2 rounded-lg hover:scale-105"
+                >
+                  Poprzednia
+                </button>
+              ) : (
+                <button
+                  disabled={true}
+                  className="min-w-24 join-item bg-primary opacity-50 p-2 rounded-lg"
                 >
                   Poprzednia
                 </button>
               )}
-              {currentPage < data.totalPages - 1 && (
+              {currentPage < data.totalPages - 1 ? (
                 <button
                   onClick={() => getAllPlants(currentPage + 1)}
-                  className="min-w-24 join-item bg-primary p-2 rounded-lg"
+                  className="min-w-24 join-item bg-primary p-2 rounded-lg hover:scale-105"
+                >
+                  Następna
+                </button>
+              ) : (
+                <button
+                  disabled={true}
+                  className="min-w-24 join-item bg-primary opacity-50 p-2 rounded-lg"
                 >
                   Następna
                 </button>

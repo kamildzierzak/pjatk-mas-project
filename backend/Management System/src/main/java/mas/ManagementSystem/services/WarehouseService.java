@@ -33,33 +33,30 @@ public class WarehouseService {
             RowEntity rowEntity = new RowEntity();
             rowEntity.setName(String.valueOf((char) ('A' + i)));
             rowEntity.setWarehouseEntity(warehouseEntity);
-//            rowService.createRow(rowEntity);
 
             List<RackEntity> racks = new ArrayList<>();
             for (int rackNumber = 1; rackNumber <= WarehouseEntity.RACKS_IN_ROW; rackNumber++) {
                 RackEntity rackEntity = new RackEntity();
                 rackEntity.setNumber(rackNumber);
                 rackEntity.setRowEntity(rowEntity);
-//                rackService.createRack(rackEntity);
 
                 List<ShelfEntity> shelves = new ArrayList<>();
                 for (int shelfNumber = 1; shelfNumber <= WarehouseEntity.SHELVES_IN_RACK; shelfNumber++) {
                     ShelfEntity shelfEntity = new ShelfEntity();
                     shelfEntity.setNumber(shelfNumber);
                     shelfEntity.setRackEntity(rackEntity);
-//                    shelfService.createShelf(shelfEntity);
+
                     shelves.add(shelfEntity);
                 }
                 rackEntity.setShelves(shelves);
                 racks.add(rackEntity);
-
             }
             rowEntity.setRacks(racks);
             rows.add(rowEntity);
         }
         warehouseEntity.setRows(rows);
 
-        warehouseRepository.save(warehouseEntity);
+        createWarehouse(warehouseEntity);
     }
 
     public WarehouseEntity createWarehouse(WarehouseEntity warehouseEntity) {
@@ -72,6 +69,36 @@ public class WarehouseService {
 
     public Optional<WarehouseEntity> getWarehouse(Long id) {
         return warehouseRepository.findById(id);
+    }
+
+    //    TODO 4 now it's working only for 1 warehouse
+    @Transactional
+    public List<RowEntity> getWarehouseRows() {
+        WarehouseEntity warehouseEntity = getWarehouse(1L).orElseThrow(() -> new RuntimeException("Warehouse not " +
+                "found"));
+        return warehouseEntity.getRows();
+    }
+
+    //    TODO 4 now it's working only for 1 warehouse
+    @Transactional
+    public List<RackEntity> getWarehousesRacks() {
+        List<RowEntity> warehouseRows = getWarehouseRows();
+        List<RackEntity> warehouseRacks = new ArrayList<>();
+
+        warehouseRows.forEach(rowEntity -> warehouseRacks.addAll(rowEntity.getRacks()));
+
+        return warehouseRacks;
+    }
+
+    //    TODO 4 now it's working only for 1 warehouse
+    @Transactional
+    public List<ShelfEntity> getWarehouseShelves() {
+        List<RackEntity> warehouseRacks = getWarehousesRacks();
+        List<ShelfEntity> warehouseShelves = new ArrayList<>();
+
+        warehouseRacks.forEach(rackEntity -> warehouseShelves.addAll(rackEntity.getShelves()));
+
+        return warehouseShelves;
     }
 
 }

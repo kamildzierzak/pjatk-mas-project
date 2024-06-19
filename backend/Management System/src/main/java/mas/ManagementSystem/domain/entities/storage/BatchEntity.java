@@ -12,7 +12,7 @@ import mas.ManagementSystem.domain.entities.PlantEntity;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "stock")
+@Table(name = "batch")
 @Getter
 @Setter
 public class BatchEntity {
@@ -24,7 +24,8 @@ public class BatchEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "fk_plantEntity", nullable = false)
     private PlantEntity plantEntity;
 
     private Double pricePerItem;

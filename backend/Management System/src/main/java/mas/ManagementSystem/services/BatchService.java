@@ -3,6 +3,8 @@ package mas.ManagementSystem.services;
 import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.entities.storage.BatchEntity;
 import mas.ManagementSystem.repositories.BatchRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,10 @@ public class BatchService {
 
     public List<BatchEntity> getBatches() {
         return batchRepository.findAll();
+    }
+
+    public Page<BatchEntity> getBatchPage(Pageable pageable) {
+        return batchRepository.findAll(pageable);
     }
 
     public Optional<BatchEntity> getBatch(Long id) {

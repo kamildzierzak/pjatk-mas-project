@@ -22,6 +22,10 @@ public class RowService {
         return rowRepository.findById(id);
     }
 
+//    public List<RowEntity> getRowsByWarehouse(Long id) {
+//        return rowRepository.findAll;
+//    }
+
     public RowEntity createRow(RowEntity rowEntity) {
         return rowRepository.save(rowEntity);
     }

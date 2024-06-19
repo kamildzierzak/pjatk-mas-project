@@ -5,21 +5,24 @@ import mas.ManagementSystem.domain.dto.BatchDto;
 import mas.ManagementSystem.domain.entities.storage.BatchEntity;
 import mas.ManagementSystem.mappers.Mapper;
 import mas.ManagementSystem.services.BatchService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/batches")
 public class BatchController {
 
-    private BatchService batchService;
-
+    private final BatchService batchService;
     private Mapper<BatchEntity, BatchDto> batchMapper;
 
-//    TODO getBatches
+    @GetMapping
+    public Page<BatchDto> getBatchPage(Pageable pageable) {
+        Page<BatchEntity> plants = batchService.getBatchPage(pageable);
+        return plants.map(batchMapper::mapTo);
+    }
+
 //    TODO getBatchById
 
     @PostMapping

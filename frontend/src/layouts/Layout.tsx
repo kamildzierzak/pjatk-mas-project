@@ -13,16 +13,17 @@ const mainNavLinks = [
     name: "Dashboard",
     href: "/dashboard",
     icon: BsHouse,
+    disabled: false,
   },
-  { name: "Szukaj", href: "/search", icon: BsSearch },
-  { name: "Asortyment", href: "/stocks", icon: BsListCheck },
+  { name: "Szukaj", href: "/search", icon: BsSearch, disabled: true },
+  { name: "Asortyment", href: "/stocks", icon: BsListCheck, disabled: false },
 ];
 
 const storageNavLinks = [
-  { name: "Rzędy", href: "/rows", icon: BsListTask },
-  { name: "Regały", href: "/racks", icon: BsListTask },
-  { name: "Półki", href: "/shelves", icon: BsListTask },
-  { name: "Partie", href: "/batches", icon: BsListTask },
+  { name: "Rzędy", href: "/rows", icon: BsListTask, disabled: false },
+  { name: "Regały", href: "/racks", icon: BsListTask, disabled: false },
+  { name: "Półki", href: "/shelves", icon: BsListTask, disabled: false },
+  { name: "Partie", href: "/batches", icon: BsListTask, disabled: false },
 ];
 
 const ordersNavLinks = [
@@ -30,16 +31,19 @@ const ordersNavLinks = [
     name: "Klienci",
     href: "/customers",
     icon: BsListTask,
+    disabled: true,
   },
   {
     name: "Dostawcy",
     href: "/suppliers",
     icon: BsListTask,
+    disabled: true,
   },
   {
     name: "Raporty",
     href: "/reports",
     icon: BsListTask,
+    disabled: true,
   },
 ];
 
@@ -47,10 +51,10 @@ export default function Layout() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   return (
-    <div className="h-full max-w-screen-2xl flex flex-col lg:flex-row mx-auto ">
+    <div className="h-full max-w-screen-2xl flex flex-col lg:flex-row mx-auto">
       {/* Navigation >= 1024px */}
       {isMenuOpen ? (
-        <div className="hidden min-h-lvh lg:flex min-w-64 border-x-2 ">
+        <div className="hidden min-h-lvh lg:flex min-w-64 border-x-2">
           <div className="w-full flex flex-col text-md font-semibold">
             <div className="h-20 flex justify-between text-2xl font-bold p-6">
               <Link
@@ -72,18 +76,22 @@ export default function Layout() {
                 {mainNavLinks.map(link => (
                   <li
                     key={link.href}
-                    className="px-4 py-2 hover:bg-primary transition-all"
+                    className="px-4 py-2 hover:bg-primary hover:scale-105 transition-all"
                   >
-                    <Link
-                      to={link.href}
-                      className="w-full flex items-center gap-4"
-                    >
-                      {link.icon ? (
-                        <link.icon />
-                      ) : (
-                        <span className="w-4"></span>
-                      )}
-                      {link.name}
+                    <Link to={link.href}>
+                      <button
+                        className={`w-full flex items-center gap-4 ${
+                          link.disabled ? "opacity-50" : ""
+                        }`}
+                        disabled={link.disabled}
+                      >
+                        {link.icon ? (
+                          <link.icon />
+                        ) : (
+                          <span className="w-4"></span>
+                        )}
+                        {link.name}
+                      </button>
                     </Link>
                   </li>
                 ))}
@@ -95,18 +103,22 @@ export default function Layout() {
                 {storageNavLinks.map(link => (
                   <li
                     key={link.href}
-                    className="px-4 py-2 hover:bg-primary transition-all"
+                    className="px-4 py-2 hover:bg-primary hover:scale-105  transition-all"
                   >
-                    <Link
-                      to={link.href}
-                      className="w-full flex items-center gap-4"
-                    >
-                      {link.icon ? (
-                        <link.icon />
-                      ) : (
-                        <span className="w-4"></span>
-                      )}
-                      {link.name}
+                    <Link to={link.href}>
+                      <button
+                        className={`w-full flex items-center gap-4 ${
+                          link.disabled ? "opacity-50" : ""
+                        }`}
+                        disabled={link.disabled}
+                      >
+                        {link.icon ? (
+                          <link.icon />
+                        ) : (
+                          <span className="w-4"></span>
+                        )}
+                        {link.name}
+                      </button>
                     </Link>
                   </li>
                 ))}
@@ -118,18 +130,22 @@ export default function Layout() {
                 {ordersNavLinks.map(link => (
                   <li
                     key={link.href}
-                    className="px-4 py-2 hover:bg-primary transition-all"
+                    className="px-4 py-2 hover:bg-primary hover:scale-105  transition-all"
                   >
-                    <Link
-                      to={link.href}
-                      className="w-full flex items-center gap-4"
-                    >
-                      {link.icon ? (
-                        <link.icon />
-                      ) : (
-                        <span className="w-4"></span>
-                      )}
-                      {link.name}
+                    <Link to={link.href}>
+                      <button
+                        className={`w-full flex items-center gap-4 ${
+                          link.disabled ? "opacity-50" : ""
+                        }`}
+                        disabled={link.disabled}
+                      >
+                        {link.icon ? (
+                          <link.icon />
+                        ) : (
+                          <span className="w-4"></span>
+                        )}
+                        {link.name}
+                      </button>
                     </Link>
                   </li>
                 ))}
@@ -138,7 +154,7 @@ export default function Layout() {
           </div>
         </div>
       ) : (
-        <div className="hidden lg:block p-6 border-r-2">
+        <div className="hidden lg:block p-6 border-x-2">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="hover:scale-110 hover:text-primary"
@@ -165,18 +181,22 @@ export default function Layout() {
                 {mainNavLinks.map(link => (
                   <li
                     key={link.href}
-                    className="px-4 py-2 hover:bg-primary transition-all"
+                    className="px-4 py-2 hover:bg-primary hover:scale-105  transition-all"
                   >
-                    <Link
-                      to={link.href}
-                      className="w-full flex items-center gap-4"
-                    >
-                      {link.icon ? (
-                        <link.icon />
-                      ) : (
-                        <span className="w-4"></span>
-                      )}
-                      {link.name}
+                    <Link to={link.href}>
+                      <button
+                        className={`w-full flex items-center gap-4 ${
+                          link.disabled ? "opacity-50" : ""
+                        }`}
+                        disabled={link.disabled}
+                      >
+                        {link.icon ? (
+                          <link.icon />
+                        ) : (
+                          <span className="w-4"></span>
+                        )}
+                        {link.name}
+                      </button>
                     </Link>
                   </li>
                 ))}
@@ -188,18 +208,22 @@ export default function Layout() {
                 {storageNavLinks.map(link => (
                   <li
                     key={link.href}
-                    className="px-4 py-2 hover:bg-primary transition-all"
+                    className="px-4 py-2 hover:bg-primary hover:scale-105  transition-all"
                   >
-                    <Link
-                      to={link.href}
-                      className="w-full flex items-center gap-4"
-                    >
-                      {link.icon ? (
-                        <link.icon />
-                      ) : (
-                        <span className="w-4"></span>
-                      )}
-                      {link.name}
+                    <Link to={link.href}>
+                      <button
+                        className={`w-full flex items-center gap-4 ${
+                          link.disabled ? "opacity-50" : ""
+                        }`}
+                        disabled={link.disabled}
+                      >
+                        {link.icon ? (
+                          <link.icon />
+                        ) : (
+                          <span className="w-4"></span>
+                        )}
+                        {link.name}
+                      </button>
                     </Link>
                   </li>
                 ))}
@@ -211,18 +235,22 @@ export default function Layout() {
                 {ordersNavLinks.map(link => (
                   <li
                     key={link.href}
-                    className="px-4 py-2 hover:bg-primary transition-all"
+                    className="px-4 py-2 hover:bg-primary hover:scale-105  transition-all"
                   >
-                    <Link
-                      to={link.href}
-                      className="w-full flex items-center gap-4"
-                    >
-                      {link.icon ? (
-                        <link.icon />
-                      ) : (
-                        <span className="w-4"></span>
-                      )}
-                      {link.name}
+                    <Link to={link.href}>
+                      <button
+                        className={`w-full flex items-center gap-4 ${
+                          link.disabled ? "opacity-50" : ""
+                        }`}
+                        disabled={link.disabled}
+                      >
+                        {link.icon ? (
+                          <link.icon />
+                        ) : (
+                          <span className="w-4"></span>
+                        )}
+                        {link.name}
+                      </button>
                     </Link>
                   </li>
                 ))}
@@ -243,7 +271,7 @@ export default function Layout() {
         </div>
       )}
       {/* Content area */}
-      <div className="w-full min-h-lvh px-6 border-r-2">
+      <div className="w-full  min-h-lvh px-16 border-r-2">
         <Outlet />
       </div>
     </div>

@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mas.ManagementSystem.domain.entities.PlantEntity;
-import mas.ManagementSystem.domain.entities.storage.ShelfEntity;
 
 @Getter
 @Setter
@@ -14,8 +12,12 @@ import mas.ManagementSystem.domain.entities.storage.ShelfEntity;
 public class BatchDto {
 
     private Long id;
-    private Integer amount;
-    private Double pricePerUnit;
-    private ShelfEntity shelfEntity;
-    private PlantEntity plantEntity;
+    private String plantName;
+    private String dimensions;
+    private Double weight;
+    private String rowLocation;
+    private Integer rackLocation;
+    private Integer shelfLocation;
+    private Integer plantsQuantity;
+    private Long orderId;
 }

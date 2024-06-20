@@ -17,10 +17,16 @@ public class BatchController {
     private final BatchService batchService;
     private Mapper<BatchEntity, BatchDto> batchMapper;
 
+//    @GetMapping
+//    public List<BatchDto> getBatches() {
+//        List<BatchEntity> batchEntities = batchService.getBatches();
+//        return batchEntities.stream().map(batchMapper::mapTo).collect(Collectors.toList());
+//    }
+
     @GetMapping
     public Page<BatchDto> getBatchPage(Pageable pageable) {
-        Page<BatchEntity> plants = batchService.getBatchPage(pageable);
-        return plants.map(batchMapper::mapTo);
+        Page<BatchEntity> batches = batchService.getBatchPage(pageable);
+        return batches.map(batchMapper::mapTo);
     }
 
 //    TODO getBatchById

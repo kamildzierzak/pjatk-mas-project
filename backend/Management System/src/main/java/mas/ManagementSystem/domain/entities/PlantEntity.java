@@ -40,7 +40,7 @@ public class PlantEntity {
 
     private Integer maximumQuantityInBatch;
 
-    @OneToMany(mappedBy = "plantEntity")
+    @OneToMany(mappedBy = "plantEntity", cascade = CascadeType.ALL)
     private List<BatchEntity> batches;
 
     @Transient
@@ -52,5 +52,5 @@ public class PlantEntity {
     public Double getCubicArea() {
         return getSquareBase() * maxPlantHeight;
     }
-    
+
 }

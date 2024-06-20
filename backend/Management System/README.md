@@ -25,6 +25,7 @@
 * [Difference Between @JoinColumn and mappedBy](https://www.baeldung.com/jpa-joincolumn-vs-mappedby)
 * [Why Is Field Injection Not Recommended?](https://www.baeldung.com/java-spring-field-injection-cons)
 * [Pagination and Sorting using Spring Data JPA](https://www.baeldung.com/spring-data-jpa-pagination-sorting)
+* [Jackson – Bidirectional Relationships](https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion)
 * [Composition vs. Inheritance with JPA and Hibernate](https://thorben-janssen.com/composition-vs-inheritance-jpa-hibernate/#using-composition-with-jpa-and-hibernate)
 * [Map Associations with JPA and Hibernate – The Ultimate Guide](https://thorben-janssen.com/ultimate-guide-association-mappings-jpa-hibernate/#manyToOne)
 * [Mapping Collections with Hibernate and JPA](https://thorben-janssen.com/collections-hibernate-jpa/)

@@ -24,7 +24,7 @@ public class BatchEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "fk_plantEntity", nullable = false)
     private PlantEntity plantEntity;
 
@@ -32,7 +32,8 @@ public class BatchEntity {
 
     private Integer quantity;
 
-    @OneToOne(mappedBy = "batchEntity")
+    @OneToOne
+    @JoinColumn(name = "fk_shelfEntity", nullable = true)
     private ShelfEntity shelfEntity;
 
     @ManyToOne
@@ -46,7 +47,7 @@ public class BatchEntity {
 
     @Transient
     public Double getTotalWeight() {
-        return quantity * plantEntity.getMaxPlantWeight();
+        return Double.valueOf(Math.round(quantity * plantEntity.getMaxPlantWeight()));
     }
 
     public void setQuantity(Integer quantity) {
@@ -56,5 +57,8 @@ public class BatchEntity {
         this.quantity = quantity;
     }
 
-    //    TODO getLocation()
+    //    TODO - create method to count real dimensions
+    public String getDimensions() {
+        return MAX_BATCH_WIDTH + "x" + BatchEntity.MAX_BATCH_HEIGHT + "x" + BatchEntity.MAX_BATCH_DEPTH;
+    }
 }

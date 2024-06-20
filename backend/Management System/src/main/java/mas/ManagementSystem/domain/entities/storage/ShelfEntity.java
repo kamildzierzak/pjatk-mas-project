@@ -1,5 +1,7 @@
 package mas.ManagementSystem.domain.entities.storage;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +14,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class ShelfEntity {
     public static final Integer SHELF_WIDTH = 140;
     public static final Integer SHELF_HEIGHT = 100;
@@ -23,12 +28,11 @@ public class ShelfEntity {
 
     private Integer number;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_rackEntity", nullable = false)
     private RackEntity rackEntity;
 
-    @OneToOne
-    @JoinColumn(name = "fk_batchEntity", nullable = true)
+    @OneToOne(mappedBy = "shelfEntity")
     private BatchEntity batchEntity;
 
     @Transient

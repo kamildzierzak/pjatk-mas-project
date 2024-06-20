@@ -25,9 +25,12 @@ export default function Login() {
               className="p-3 border rounded-lg"
             />
           </div>
-          <button className="w-full h-10 text-center bg-black text-white rounded-lg hover:scale-105 hover:bg-black/85 transition-all font-semibold">
-            Zaloguj
-          </button>
+          {/* added Link for test purpouse */}
+          <Link to="/dashboard">
+            <button className="w-full h-10 text-center bg-black text-white rounded-lg hover:scale-105 hover:bg-black/85 transition-all font-semibold">
+              Zaloguj
+            </button>
+          </Link>
           <div className="divider w-full text-center text-neutral/50">lub</div>
           <button className="w-full h-10 text-center bg-green-500 text-white rounded-lg hover:scale-105 hover:bg-green-500/85 transition-all font-semibold">
             Zarejestruj się

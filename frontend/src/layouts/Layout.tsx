@@ -20,9 +20,9 @@ const mainNavLinks = [
 ];
 
 const storageNavLinks = [
-  { name: "Rzędy", href: "/rows", icon: BsListTask, disabled: false },
-  { name: "Regały", href: "/racks", icon: BsListTask, disabled: false },
-  { name: "Półki", href: "/shelves", icon: BsListTask, disabled: false },
+  { name: "Rzędy", href: "/rows", icon: BsListTask, disabled: true },
+  { name: "Regały", href: "/racks", icon: BsListTask, disabled: true },
+  { name: "Półki", href: "/shelves", icon: BsListTask, disabled: true },
   { name: "Partie", href: "/batches", icon: BsListTask, disabled: false },
 ];
 

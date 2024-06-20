@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react";
-import { getPlants } from "../services/plantService";
 import { BsFunnel, BsListUl, BsGrid } from "react-icons/bs";
-import StockListElement from "../components/ui/StockListElement";
+import BatchListElement from "../components/ui/BatchListElement";
+import { getBatches } from "../services/batchService";
+import { useNavigate } from "react-router-dom";
 
 const draftState = {
   searchInput: true,
   filterButton: true,
-  addPlantButton: true,
+  addPlantButton: false,
   listButton: true,
   gridButton: true,
 };
 
-export default function Stocks() {
+export default function Batches() {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const getAllPlants = async (page = 0, size = 10) => {
+  const getAllBatches = async (page = 0, size = 10) => {
     try {
       setCurrentPage(page);
 
-      const { data } = await getPlants(page, size);
+      const { data } = await getBatches(page, size);
 
       setData(data);
     } catch (error) {
@@ -32,13 +34,20 @@ export default function Stocks() {
     console.log("Implement search plants");
   };
 
+  // TODO: Implement validation before navigating to /batches/create
+  // Check if there is at least one delivery to unload
+  // Check if there is at least one empty shelf
+  const handleAddBatch = () => {
+    navigate("/batches/create");
+  };
+
   useEffect(() => {
-    getAllPlants();
+    getAllBatches();
   }, []);
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="h-20 text-2xl font-bold py-6">Asortyment roślin</h1>
+      <h1 className="h-20 text-2xl font-bold py-6">Partie</h1>
       <div className="flex justify-between flex-wrap gap-5">
         <div className="flex flex-wrap gap-4">
           <input
@@ -61,12 +70,12 @@ export default function Stocks() {
         </div>
         <div className="max-w-[300px] min-h-10 flex flex-wrap gap-6">
           <button
+            onClick={handleAddBatch}
             className={`max-w-[200px] px-4 py-2 rounded-lg bg-primary text-white font-bold ${
               draftState.addPlantButton ? "opacity-50" : ""
             }`}
-            disabled={true}
           >
-            Dodaj roślinę
+            Dodaj partie
           </button>
           <div className="h-10 flex p-1 bg-base-200 rounded-lg">
             <button
@@ -89,14 +98,18 @@ export default function Stocks() {
       <div>
         {data && data.content?.length > 0 ? (
           <ul className="flex flex-col gap-3">
-            <li className="w-full min-h-14 flex flex-col md:flex-row gap-5 p-4">
-              <span className="font-bold min-w-16">ID</span>
-              <span className="font-bold min-w-44">Nazwa</span>
-              <span className="font-bold min-w-20">Typ</span>
-              <span className="font-bold">Opis</span>
+            <li className="w-full min-h-14 flex flex-col lg:flex-row gap-5 p-4 text-center">
+              <span className="font-bold min-w-16 ">ID</span>
+              <span className="font-bold min-w-36">Nazwa</span>
+              <span className="font-bold min-w-20">Wymiary</span>
+              <span className="font-bold min-w-12">Waga</span>
+              <span className="font-bold min-w-12">Rząd</span>
+              <span className="font-bold min-w-12">Regał</span>
+              <span className="font-bold min-w-12">Półka</span>
+              <span className="font-bold min-w-16">Ilość</span>
             </li>
-            {data.content?.map(plant => {
-              return <StockListElement key={plant.id} plant={plant} />;
+            {data.content?.map(batch => {
+              return <BatchListElement key={batch.id} batch={batch} />;
             })}
           </ul>
         ) : (
@@ -109,7 +122,7 @@ export default function Stocks() {
             <div className="flex gap-1 join text-white font-semibold">
               {currentPage !== 0 ? (
                 <button
-                  onClick={() => getAllPlants(currentPage - 1)}
+                  onClick={() => getAllBatches(currentPage - 1)}
                   className="min-w-24 join-item bg-primary p-2 rounded-lg hover:scale-105"
                 >
                   Poprzednia
@@ -124,7 +137,7 @@ export default function Stocks() {
               )}
               {currentPage < data.totalPages - 1 ? (
                 <button
-                  onClick={() => getAllPlants(currentPage + 1)}
+                  onClick={() => getAllBatches(currentPage + 1)}
                   className="min-w-24 join-item bg-primary p-2 rounded-lg hover:scale-105"
                 >
                   Następna

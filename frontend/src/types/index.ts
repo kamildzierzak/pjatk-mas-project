@@ -6,6 +6,11 @@ export enum PlantType {
   CREEPER,
 }
 
+export type Pageable = {
+  page?: number;
+  size?: number;
+};
+
 export type Plant = {
   id?: number;
   name: string;
@@ -13,7 +18,14 @@ export type Plant = {
   type: PlantType;
 };
 
-export type PageablePlant = {
-  page?: number;
-  size?: number;
+export type Batch = {
+  id?: number;
+  plantName: string;
+  dimensions: string;
+  weight: string;
+  rowLocation: string;
+  rackLocation: string;
+  shelfLocation: string;
+  plantsQuantity: number;
+  orderId?: number;
 };

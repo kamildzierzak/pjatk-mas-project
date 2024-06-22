@@ -17,6 +17,10 @@ public class RowService {
     return rowRepository.findAll();
   }
 
+  public List<RowEntity> getRowsWithEmptyShelves() {
+    return rowRepository.findAllRowsWithEmptyShelves();
+  }
+
   public Optional<RowEntity> getRow(Long id) {
     return rowRepository.findById(id);
   }

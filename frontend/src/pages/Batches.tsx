@@ -98,8 +98,8 @@ export default function Batches() {
       <div>
         {data && data.content?.length > 0 ? (
           <ul className="flex flex-col gap-3">
-            <li className="w-full min-h-14 flex flex-col lg:flex-row gap-5 p-4 text-center">
-              <span className="font-bold min-w-16 ">ID</span>
+            <li className="hidden w-full min-h-14 lg:flex flex-row gap-5 p-4 ">
+              <span className="font-bold min-w-10 ">ID</span>
               <span className="font-bold min-w-36">Nazwa</span>
               <span className="font-bold min-w-20">Wymiary</span>
               <span className="font-bold min-w-12">Waga</span>

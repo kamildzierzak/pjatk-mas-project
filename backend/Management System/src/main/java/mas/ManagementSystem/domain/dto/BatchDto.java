@@ -11,13 +11,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BatchDto {
 
-    private Long id;
-    private String plantName;
-    private String dimensions;
-    private Double weight;
-    private String rowLocation;
-    private Integer rackLocation;
-    private Integer shelfLocation;
-    private Integer plantsQuantity;
-    private Long orderId;
+  private Long id;
+  private String plantName;
+  private String dimensions;
+  private Double weight;
+  private String rowLocation;
+  private Integer rackLocation;
+  private Integer shelfLocation;
+  private Integer quantity;
+  private Long orderId;
 }

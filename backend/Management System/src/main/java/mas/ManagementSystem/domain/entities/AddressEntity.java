@@ -1,6 +1,11 @@
 package mas.ManagementSystem.domain.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,21 +20,21 @@ import mas.ManagementSystem.domain.entities.people.PersonEntity;
 @Setter
 public class AddressEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  private Long id;
 
-    @OneToOne(mappedBy = "addressEntity")
-    private PersonEntity personEntity;
+  private String street;
 
-    private String street;
+  private String city;
 
-    private String city;
+  private String state;
 
-    private String state;
+  private String postalCode;
 
-    private String postalCode;
+  private String country;
 
-    private String country;
+  @OneToOne(mappedBy = "addressEntity")
+  private PersonEntity personEntity;
 
 }

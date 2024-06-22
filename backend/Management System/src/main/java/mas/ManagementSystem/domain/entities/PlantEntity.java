@@ -1,14 +1,23 @@
 package mas.ManagementSystem.domain.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mas.ManagementSystem.domain.entities.storage.BatchEntity;
 import mas.ManagementSystem.domain.types.PlantType;
-
-import java.util.List;
 
 @Entity
 @Table(name = "plant")
@@ -18,39 +27,39 @@ import java.util.List;
 @Setter
 public class PlantEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  private Long id;
 
-    @Column(unique = true)
-    private String name;
+  @Column(unique = true)
+  private String name;
 
-    private String description;
+  private String description;
 
-    @Enumerated(EnumType.STRING)
-    private PlantType type;
+  @Enumerated(EnumType.STRING)
+  private PlantType type;
 
-    private Double maxPlantWidth;
+  private Double maxPlantWidth;
 
-    private Double maxPlantHeight;
+  private Double maxPlantHeight;
 
-    private Double maxPlantDepth;
+  private Double maxPlantDepth;
 
-    private Double maxPlantWeight;
+  private Double maxPlantWeight;
 
-    private Integer maximumQuantityInBatch;
+  private Integer maximumQuantityInBatch;
 
-    @OneToMany(mappedBy = "plantEntity", cascade = CascadeType.ALL)
-    private List<BatchEntity> batches;
+  @OneToMany(mappedBy = "plantEntity", cascade = CascadeType.ALL)
+  private List<BatchEntity> batches;
 
-    @Transient
-    public Double getSquareBase() {
-        return maxPlantWidth * maxPlantDepth;
-    }
+  @Transient
+  public Double getSquareBase() {
+    return maxPlantWidth * maxPlantDepth;
+  }
 
-    @Transient
-    public Double getCubicArea() {
-        return getSquareBase() * maxPlantHeight;
-    }
+  @Transient
+  public Double getCubicArea() {
+    return getSquareBase() * maxPlantHeight;
+  }
 
 }

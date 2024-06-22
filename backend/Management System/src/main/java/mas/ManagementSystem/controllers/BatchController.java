@@ -7,15 +7,17 @@ import mas.ManagementSystem.mappers.Mapper;
 import mas.ManagementSystem.services.BatchService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/batches")
 public class BatchController {
 
-    private final BatchService batchService;
-    private Mapper<BatchEntity, BatchDto> batchMapper;
+  private final BatchService batchService;
+  private Mapper<BatchEntity, BatchDto> batchMapper;
 
 //    @GetMapping
 //    public List<BatchDto> getBatches() {
@@ -23,20 +25,21 @@ public class BatchController {
 //        return batchEntities.stream().map(batchMapper::mapTo).collect(Collectors.toList());
 //    }
 
-    @GetMapping
-    public Page<BatchDto> getBatchPage(Pageable pageable) {
-        Page<BatchEntity> batches = batchService.getBatchPage(pageable);
-        return batches.map(batchMapper::mapTo);
-    }
+  @GetMapping
+  public Page<BatchDto> getBatchPage(Pageable pageable) {
+    Page<BatchEntity> batches = batchService.getBatchPage(pageable);
+    return batches.map(batchMapper::mapTo);
+  }
 
 //    TODO getBatchById
 
-    @PostMapping
-    public BatchDto createBatch(@RequestBody BatchDto batch) {
-        BatchEntity batchEntity = batchMapper.mapFrom(batch);
-        BatchEntity savedBatchEntity = batchService.createBatch(batchEntity);
-        return batchMapper.mapTo(savedBatchEntity);
-    }
+//  TODO createBatch
+//  @PostMapping
+//  public BatchDto createBatch(@RequestBody BatchDto batch) {
+//    BatchEntity batchEntity = batchMapper.mapFrom(batch);
+//    BatchEntity savedBatchEntity = batchService.createBatch(batchEntity);
+//    return batchMapper.mapTo(savedBatchEntity);
+//  }
 
 //    TODO updateBatch
 //    TODO deleteBatch

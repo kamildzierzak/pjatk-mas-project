@@ -12,9 +12,9 @@ import mas.ManagementSystem.domain.types.PlantType;
 @AllArgsConstructor
 public class PlantDto {
 
-    private Long id;
-    private String name;
-    private String description;
-    private PlantType type;
+  private Long id;
+  private String name;
+  private String description;
+  private PlantType type;
 
 }

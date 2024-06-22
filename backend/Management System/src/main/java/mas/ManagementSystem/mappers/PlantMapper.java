@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class PlantMapper implements Mapper<PlantEntity, PlantDto> {
 
-    private ModelMapper modelMapper;
+  private ModelMapper modelMapper;
 
-    @Override
-    public PlantDto mapTo(PlantEntity plantEntity) {
-        return modelMapper.map(plantEntity, PlantDto.class);
-    }
+  @Override
+  public PlantDto mapTo(PlantEntity plantEntity) {
+    return modelMapper.map(plantEntity, PlantDto.class);
+  }
 
-    @Override
-    public PlantEntity mapFrom(PlantDto plantDto) {
-        return modelMapper.map(plantDto, PlantEntity.class);
-    }
+  @Override
+  public PlantEntity mapFrom(PlantDto plantDto) {
+    return modelMapper.map(plantDto, PlantEntity.class);
+  }
 }

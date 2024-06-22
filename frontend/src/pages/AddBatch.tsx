@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getOrders } from "../services/orderServices";
+import { getRows } from "../services/rowServices";
 
 export default function AddBatch() {
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
+  const [deliveriesData, setDeliveriesData] = useState([]);
+  const [rowsData, setRowsData] = useState([]);
   const [formState, setFormState] = useState({
     selectedDelivery: "Wybierz",
     selectedBatch: "Wybierz",
@@ -16,14 +18,15 @@ export default function AddBatch() {
     selectedBatchQuantity: 0,
   });
   const [batchOptions, setBatchOptions] = useState([]);
-  const [rowOptions, setRowOptions] = useState([]);
   const [rackOptions, setRackOptions] = useState([]);
   const [shelfOptions, setShelfOptions] = useState([]);
 
-  const getAllOrders = async () => {
+  const getAllData = async () => {
     try {
-      const { data } = await getOrders();
-      setData(data);
+      const { data: orders } = await getOrders();
+      const { data: rows } = await getRows();
+      setDeliveriesData(orders);
+      setRowsData(rows);
     } catch (error) {
       console.log(error);
     }
@@ -36,9 +39,10 @@ export default function AddBatch() {
 
   const handleSelectDelivery = e => {
     const selectedDeliveryId = e.target.value;
-    const selectedDelivery = data.find(
+    const selectedDelivery = deliveriesData.find(
       delivery => delivery.id == selectedDeliveryId
     );
+
     setFormState({
       ...formState,
       selectedDelivery: selectedDeliveryId,
@@ -54,13 +58,69 @@ export default function AddBatch() {
     const selectedBatch = batchOptions.find(
       batch => batch.id == selectedBatchId
     );
-    console.log(selectedBatch);
 
     setFormState({
       ...formState,
       selectedBatch: selectedBatchId,
       selectedPlantName: selectedBatch ? selectedBatch.plantName : "",
       selectedBatchQuantity: selectedBatch ? selectedBatch.quantity : 0,
+    });
+  };
+
+  const handleSelectRow = e => {
+    const selectedRowId = e.target.value;
+    const selectedRow = rowsData.find(row => row.id == selectedRowId);
+
+    setFormState({
+      ...formState,
+      selectedRow: selectedRowId,
+      selectedRack: "Wybierz",
+      selectedShelf: "Wybierz",
+    });
+
+    if (!selectedRow) return;
+    const emptyRacks = selectedRow.racks.filter(rack => {
+      return rack.shelves.some(shelf => {
+        return (
+          shelf.batchId === null ||
+          shelf.batchId === undefined ||
+          shelf.batchId === ""
+        );
+      });
+    });
+
+    setRackOptions(selectedRow ? emptyRacks || [] : []);
+  };
+
+  const handleSelectRack = e => {
+    const selectedRackId = e.target.value;
+    const selectedRack = rackOptions.find(rack => rack.id == selectedRackId);
+
+    setFormState({
+      ...formState,
+      selectedRack: selectedRackId,
+      selectedShelf: "Wybierz",
+    });
+
+    // Filter empty shelves -> Move it to the backend later
+    if (!selectedRack) return;
+    const emptyShelves = selectedRack.shelves.filter(shelf => {
+      return (
+        shelf.batchId === null ||
+        shelf.batchId === undefined ||
+        shelf.batchId === ""
+      );
+    });
+
+    setShelfOptions(selectedRack ? emptyShelves || [] : []);
+  };
+
+  const handleSelectShelf = e => {
+    const selectedShelfId = e.target.value;
+
+    setFormState({
+      ...formState,
+      selectedShelf: selectedShelfId,
     });
   };
 
@@ -75,7 +135,7 @@ export default function AddBatch() {
   const handleAdd = () => {};
 
   useEffect(() => {
-    getAllOrders();
+    getAllData();
   }, []);
 
   return (
@@ -97,7 +157,7 @@ export default function AddBatch() {
             className="h-10 border rounded-lg px-4 py-2"
           >
             <option value="Wybierz">Wybierz</option>
-            {data.map(delivery => {
+            {deliveriesData.map(delivery => {
               return (
                 <option key={delivery.id} value={delivery.id}>
                   {delivery.id}
@@ -134,13 +194,20 @@ export default function AddBatch() {
             Rząd
           </label>
           <select
-            onChange={handleSelect}
+            onChange={handleSelectRow}
             name="selectedRow"
             value={formState.selectedRow}
             disabled={formState.selectedBatch === "Wybierz"}
             className="h-10 border rounded-lg px-4 py-2"
           >
             <option value="Wybierz">Wybierz</option>
+            {rowsData.map(row => {
+              return (
+                <option key={row.id} value={row.id}>
+                  {row.id}
+                </option>
+              );
+            })}
           </select>
         </div>
         {/* Rack select */}
@@ -149,13 +216,20 @@ export default function AddBatch() {
             Regał
           </label>
           <select
-            onChange={e => console.log(e.target.value)}
+            onChange={handleSelectRack}
             name="selectedRack"
             value={formState.selectedRack}
             disabled={formState.selectedRow === "Wybierz"}
             className="h-10 border rounded-lg px-4 py-2"
           >
             <option value="Wybierz">Wybierz</option>
+            {rackOptions.map(rack => {
+              return (
+                <option key={rack.id} value={rack.id}>
+                  {rack.id}
+                </option>
+              );
+            })}
           </select>
         </div>
         {/* Shelf select */}
@@ -164,13 +238,20 @@ export default function AddBatch() {
             Półka
           </label>
           <select
-            onChange={e => console.log(e.target.value)}
+            onChange={handleSelectShelf}
             name="selectedShelf"
             value={formState.selectedShelf}
             disabled={formState.selectedRack === "Wybierz"}
             className="h-10 border rounded-lg px-4 py-2"
           >
             <option value="Wybierz">Wybierz</option>
+            {shelfOptions.map(shelf => {
+              return (
+                <option key={shelf.id} value={shelf.id}>
+                  {shelf.id}
+                </option>
+              );
+            })}
           </select>
         </div>
         {/* Details */}

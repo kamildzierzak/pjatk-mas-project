@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import {
   BsHouse,
   BsSearch,

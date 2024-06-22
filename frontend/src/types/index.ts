@@ -19,13 +19,13 @@ export type Plant = {
 };
 
 export type Batch = {
-  id?: number;
+  id: number;
   plantName: string;
   dimensions: string;
   weight: string;
   rowLocation: string;
   rackLocation: string;
   shelfLocation: string;
-  plantsQuantity: number;
+  quantity: number;
   orderId?: number;
 };

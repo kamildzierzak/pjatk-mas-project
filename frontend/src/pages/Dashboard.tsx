@@ -64,7 +64,7 @@ export default function Dashboard() {
       <div className="flex flex-col gap-8">
         <h2 className="text-xl font-bold">Zamówienia w trakcie realizacji</h2>
         <div className="w-full flex flex-col gap-2 p-6 border rounded-lg">
-          <ul>
+          <ul className="flex flex-col gap-2">
             <li className="w-full min-h-14 flex flex-col lg:flex-row gap-5 p-4 text-center">
               <span className="font-bold min-w-16">ID</span>
               <span className="font-bold min-w-40">Zawartość</span>
@@ -76,9 +76,30 @@ export default function Dashboard() {
             <li className="w-full min-h-14 flex flex-col lg:flex-row gap-5 p-4 border rounded-lg shadow text-center">
               <span className="font-semibold min-w-16">1</span>
               <span className="font-semibold min-w-40">Róże itp</span>
-              <span className="font-semibold min-w-24">Dostawa</span>
+              <span className="font-semibold min-w-24">Sprzedaż</span>
               <span className="font-semibold min-w-24">Stanisław</span>
               <span className="font-semibold min-w-12">33</span>
+            </li>
+            <li className="w-full min-h-14 flex flex-col lg:flex-row gap-5 p-4 border rounded-lg shadow text-center">
+              <span className="font-semibold min-w-16">2</span>
+              <span className="font-semibold min-w-40">Kaktusy</span>
+              <span className="font-semibold min-w-24">Sprzedaż</span>
+              <span className="font-semibold min-w-24">Zdzisław</span>
+              <span className="font-semibold min-w-12">50</span>
+            </li>
+            <li className="w-full min-h-14 flex flex-col lg:flex-row gap-5 p-4 border rounded-lg shadow text-center">
+              <span className="font-semibold min-w-16">3</span>
+              <span className="font-semibold min-w-40">Bratki</span>
+              <span className="font-semibold min-w-24">Sprzedaż</span>
+              <span className="font-semibold min-w-24">Marlena</span>
+              <span className="font-semibold min-w-12">11</span>
+            </li>
+            <li className="w-full min-h-14 flex flex-col lg:flex-row gap-5 p-4 border rounded-lg shadow text-center">
+              <span className="font-semibold min-w-16">4</span>
+              <span className="font-semibold min-w-40">Tulipany</span>
+              <span className="font-semibold min-w-24">Sprzedaż</span>
+              <span className="font-semibold min-w-24">Magdalena</span>
+              <span className="font-semibold min-w-12">55</span>
             </li>
           </ul>
         </div>

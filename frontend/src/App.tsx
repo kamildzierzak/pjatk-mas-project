@@ -7,7 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Stocks from "./pages/Stocks";
 import Batches from "./pages/Batches";
 import AddBatch from "./pages/AddBatch";
-import Batch from "./pages/Batch";
+import BatchDetails from "./pages/BatchDetails";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/batches/:batchId",
-        element: <Batch />,
+        element: <BatchDetails />,
       },
     ],
   },

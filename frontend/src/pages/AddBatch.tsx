@@ -1,49 +1,71 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const mock = {
-  deliveries: [
-    {
-      id: 1,
-      name: "Dostawa 1",
-      batches: [
-        { id: 1, name: "Partia 1" },
-        { id: 2, name: "Partia 2" },
-      ],
-    },
-    {
-      id: 2,
-      name: "Dostawa 2",
-      batches: [
-        { id: 3, name: "Partia 3" },
-        { id: 4, name: "Partia 4" },
-      ],
-    },
-    {
-      id: 3,
-      name: "Dostawa 3",
-      batches: [
-        { id: 5, name: "Partia 5" },
-        { id: 6, name: "Partia 6" },
-      ],
-    },
-  ],
-};
+import { getOrders } from "../services/orderServices";
 
 export default function AddBatch() {
   const navigate = useNavigate();
-  const [selectedDelivery, setSelectedDelivery] = useState("");
-  const [selectedBatch, setSelectedBatch] = useState("");
-  const [selectedRow, setSelectedRow] = useState("");
-  const [selectedRack, setSelectedRack] = useState("");
-  const [selectedShelf, setSelectedShelf] = useState("");
-  const [selectedPlantName, setSelectedPlantName] = useState("");
-  const [selectedPricePerItem, setSelectedPricePerItem] = useState(0);
-  const [selectedPlantsQuantity, setSelectedPlantsQuantity] = useState(0);
+  const [data, setData] = useState([]);
+  const [formState, setFormState] = useState({
+    selectedDelivery: "Wybierz",
+    selectedBatch: "Wybierz",
+    selectedRow: "Wybierz",
+    selectedRack: "Wybierz",
+    selectedShelf: "Wybierz",
+    selectedPlantName: "",
+    selectedPricePerItem: 0,
+    selectedBatchQuantity: 0,
+  });
+  const [batchOptions, setBatchOptions] = useState([]);
+  const [rowOptions, setRowOptions] = useState([]);
+  const [rackOptions, setRackOptions] = useState([]);
+  const [shelfOptions, setShelfOptions] = useState([]);
+
+  const getAllOrders = async () => {
+    try {
+      const { data } = await getOrders();
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSelect = e => {
+    const { name, value } = e.target;
+    setFormState({ ...formState, [name]: value });
+  };
+
+  const handleSelectDelivery = e => {
+    const selectedDeliveryId = e.target.value;
+    const selectedDelivery = data.find(
+      delivery => delivery.id == selectedDeliveryId
+    );
+    setFormState({
+      ...formState,
+      selectedDelivery: selectedDeliveryId,
+      selectedBatch: "Wybierz",
+      selectedPlantName: "",
+      selectedBatchQuantity: 0,
+    });
+    setBatchOptions(selectedDelivery ? selectedDelivery.content || [] : []);
+  };
+
+  const handleSelectBatch = e => {
+    const selectedBatchId = e.target.value;
+    const selectedBatch = batchOptions.find(
+      batch => batch.id == selectedBatchId
+    );
+    console.log(selectedBatch);
+
+    setFormState({
+      ...formState,
+      selectedBatch: selectedBatchId,
+      selectedPlantName: selectedBatch ? selectedBatch.plantName : "",
+      selectedBatchQuantity: selectedBatch ? selectedBatch.quantity : 0,
+    });
+  };
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    console.log(e.target.elements);
   };
 
   const handleCancel = () => {
@@ -51,6 +73,10 @@ export default function AddBatch() {
   };
 
   const handleAdd = () => {};
+
+  useEffect(() => {
+    getAllOrders();
+  }, []);
 
   return (
     <div className="flex flex-col gap-8">
@@ -65,17 +91,16 @@ export default function AddBatch() {
             Dostawa
           </label>
           <select
-            onChange={e => setSelectedDelivery(e.target.value)}
-            name="delivery"
-            id="delivery"
-            value={selectedDelivery}
+            onChange={handleSelectDelivery}
+            name="selectedDelivery"
+            value={formState.selectedDelivery}
             className="h-10 border rounded-lg px-4 py-2"
           >
             <option value="Wybierz">Wybierz</option>
-            {mock.deliveries.map(delivery => {
+            {data.map(delivery => {
               return (
-                <option key={delivery.id} value={delivery.name}>
-                  {delivery.name}
+                <option key={delivery.id} value={delivery.id}>
+                  {delivery.id}
                 </option>
               );
             })}
@@ -87,15 +112,21 @@ export default function AddBatch() {
             Partia
           </label>
           <select
-            onChange={e => console.log(e.target.value)}
-            name="batch"
-            id="batch"
-            value={selectedBatch}
-            className="h-10 border rounded-lg px-4 py-2"
+            onChange={handleSelectBatch}
+            name="selectedBatch"
+            value={formState.selectedBatch}
+            disabled={formState.selectedDelivery === "Wybierz"}
+            className={`h-10 border rounded-lg px-4 py-2`}
           >
             <option value="Wybierz">Wybierz</option>
+            {batchOptions.map(batch => {
+              return (
+                <option key={batch.id} value={batch.id}>
+                  {batch.id}
+                </option>
+              );
+            })}
           </select>
-          {selectedBatch}
         </div>
         {/* Row select */}
         <div className="flex flex-col gap-2">
@@ -103,15 +134,14 @@ export default function AddBatch() {
             Rząd
           </label>
           <select
-            onChange={e => console.log(e.target.value)}
-            name="row"
-            id="row"
-            value={selectedRow}
+            onChange={handleSelect}
+            name="selectedRow"
+            value={formState.selectedRow}
+            disabled={formState.selectedBatch === "Wybierz"}
             className="h-10 border rounded-lg px-4 py-2"
           >
             <option value="Wybierz">Wybierz</option>
           </select>
-          {selectedRow}
         </div>
         {/* Rack select */}
         <div className="flex flex-col gap-2">
@@ -120,14 +150,13 @@ export default function AddBatch() {
           </label>
           <select
             onChange={e => console.log(e.target.value)}
-            name="rack"
-            id="rack"
-            value={selectedRack}
+            name="selectedRack"
+            value={formState.selectedRack}
+            disabled={formState.selectedRow === "Wybierz"}
             className="h-10 border rounded-lg px-4 py-2"
           >
             <option value="Wybierz">Wybierz</option>
           </select>
-          {selectedRack}
         </div>
         {/* Shelf select */}
         <div className="flex flex-col gap-2">
@@ -136,16 +165,15 @@ export default function AddBatch() {
           </label>
           <select
             onChange={e => console.log(e.target.value)}
-            name="shelf"
-            id="shelf"
-            value={selectedShelf}
+            name="selectedShelf"
+            value={formState.selectedShelf}
+            disabled={formState.selectedRack === "Wybierz"}
             className="h-10 border rounded-lg px-4 py-2"
           >
             <option value="Wybierz">Wybierz</option>
           </select>
-          {selectedShelf}
         </div>
-
+        {/* Details */}
         <div className="flex flex-col gap-2">
           <span className="font-bold">Szczegóły</span>
           <div className="flex flex-col md:flex-row gap-2">
@@ -155,7 +183,8 @@ export default function AddBatch() {
               </label>
               <input
                 type="text"
-                value={selectedPlantName}
+                name="selectedPlantName"
+                value={formState.selectedPlantName}
                 disabled={true}
                 className="h-10 px-4 py-2 rounded-lg border"
               />
@@ -165,9 +194,11 @@ export default function AddBatch() {
                 Cena za sztukę (zł)
               </label>
               <input
-                onChange={e => setSelectedPricePerItem(e.target.value)}
-                value={selectedPricePerItem}
+                onChange={handleSelect}
+                name="selectedPricePerItem"
+                value={formState.selectedPricePerItem}
                 type="text"
+                disabled={formState.selectedShelf === "Wybierz"}
                 className="h-10 px-4 py-2 rounded-lg border"
               />
             </div>
@@ -176,9 +207,11 @@ export default function AddBatch() {
                 Ilość
               </label>
               <input
-                onChange={e => setSelectedPlantsQuantity(e.target.value)}
-                value={selectedPlantsQuantity}
+                onChange={handleSelect}
+                name="selectedBatchQuantity"
+                value={formState.selectedBatchQuantity}
                 type="text"
+                disabled={formState.selectedShelf === "Wybierz"}
                 className="h-10 px-4 py-2 rounded-lg border"
               />
             </div>

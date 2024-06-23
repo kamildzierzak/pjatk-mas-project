@@ -1,0 +1,31 @@
+# Ignore the target directory (output of the build process)
+target
+
+# Ignore Maven or Gradle wrapper directories
+.mvn
+.gradle
+
+# Ignore IDE-specific files
+*.iml
+.idea
+*.swp
+.vscode
+
+# Ignore OS-specific files
+.DS_Store
+
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore temporary files
+tmp
+temp
+*.tmp
+*.temp
+*.log
+
+# Ignore environment-specific files
+.env
+*.env
+.env.*

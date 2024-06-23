@@ -75,7 +75,7 @@
     <version>3.3.0</version> <!-- lookup parent from repository -->
   </parent>
   <properties>
-    <java.version>22</java.version>
+    <java.version>17</java.version>
   </properties>
 
   <version>0.0.1-SNAPSHOT</version>

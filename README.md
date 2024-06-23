@@ -10,3 +10,11 @@
 ## Other
 
 1. Swagger UI: http://localhost:8080/swagger-ui.html
+
+## Docker postgres
+
+inside backend folder
+
+`./mvnw clean package`
+
+`docker build . -t management-system`

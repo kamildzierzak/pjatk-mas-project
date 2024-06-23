@@ -40,4 +40,5 @@ public class BatchMapper implements Mapper<BatchEntity, BatchDto> {
   public BatchEntity mapFrom(BatchDto batchDto) {
     return modelMapper.map(batchDto, BatchEntity.class);
   }
+
 }

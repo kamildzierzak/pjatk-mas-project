@@ -4,15 +4,21 @@
 
 * config - contains configuration classes for Spring Boot application
 * controllers - controller classes, which handle incoming HTTP requests and return responses
-* domain (model) - holds the core domain objects of application, representing the main business entities and logic
-    * dto - simple objects used to transfer data between different parts of the application, especially between the
+* domain (model) - holds the core domain objects of application, representing the main business
+  entities and logic
+    * dto - simple objects used to transfer data between different parts of the application,
+      especially between the
       client and server
-    * entities - the JPA entities that map to database tables. They are annotated with @Entity and typically contain
-      fields, getters/setters, and possibly relationships between other entities (e.g., @OneToMany, @ManyToOne)
+    * entities - the JPA entities that map to database tables. They are annotated with @Entity and
+      typically contain
+      fields, getters/setters, and possibly relationships between other entities (e.g., @OneToMany,
+      @ManyToOne)
 * mappers - responsible for mapping data between different layers of the application
-* repositories - contains repository interfaces that extend Spring Data JPA repositories. These interfaces are used to
+* repositories - contains repository interfaces that extend Spring Data JPA repositories. These
+  interfaces are used to
   perform CRUD operations on entities
-* services - includes service classes, which contain the business logic of application. Service classes interact with
+* services - includes service classes, which contain the business logic of application. Service
+  classes interact with
   repositories to fetch, process, and save data.
 
 ### Notes

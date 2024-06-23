@@ -13,4 +13,5 @@ public interface BatchRepository extends JpaRepository<BatchEntity, Long> {
   @Query("SELECT batch FROM BatchEntity batch "
       + "WHERE batch.shelfEntity IS NOT NULL")
   Page<BatchEntity> findAllBatchesWithoutShelf(Pageable pageable);
+
 }

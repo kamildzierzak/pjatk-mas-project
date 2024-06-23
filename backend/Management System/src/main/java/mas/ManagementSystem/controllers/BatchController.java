@@ -3,7 +3,7 @@ package mas.ManagementSystem.controllers;
 import lombok.AllArgsConstructor;
 import mas.ManagementSystem.domain.dto.BatchDto;
 import mas.ManagementSystem.domain.entities.storage.BatchEntity;
-import mas.ManagementSystem.mappers.Mapper;
+import mas.ManagementSystem.mappers.BatchMapper;
 import mas.ManagementSystem.services.BatchService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BatchController {
 
   private final BatchService batchService;
-  private Mapper<BatchEntity, BatchDto> batchMapper;
+  private BatchMapper batchMapper;
 
 //    @GetMapping
 //    public List<BatchDto> getBatches() {

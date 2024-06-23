@@ -23,6 +23,7 @@ import mas.ManagementSystem.services.BatchService;
 import mas.ManagementSystem.services.OrderService;
 import mas.ManagementSystem.services.PersonService;
 import mas.ManagementSystem.services.PlantService;
+import mas.ManagementSystem.services.ShelfService;
 import mas.ManagementSystem.services.WarehouseService;
 import org.springframework.stereotype.Component;
 
@@ -31,10 +32,11 @@ import org.springframework.stereotype.Component;
 public class DataInitializer {
 
   private final WarehouseService warehouseService;
-  private final PlantService plantService;
+  private final ShelfService shelfService;
   private final PersonService personService;
-  private final BatchService batchService;
   private final OrderService orderService;
+  private final BatchService batchService;
+  private final PlantService plantService;
 
   @PostConstruct
   public void init() {
@@ -232,7 +234,7 @@ public class DataInitializer {
       List<BatchEntity> batches = new ArrayList<>();
       Random random = new Random();
 
-      for (int i = 1; i <= 25; i++) {
+      for (int i = 1; i <= 100; i++) {
         PlantEntity randomPlant = plants.get(random.nextInt(plants.size()));
         Double randomPrice = Double.valueOf(Math.round(i * Math.random() * 100));
 
@@ -262,9 +264,12 @@ public class DataInitializer {
             randomPlant1.getMaximumQuantityInBatch());
         BatchEntity batchEntity2 = batchService.createBatch(randomPlant2, randomPrice / 10,
             randomPlant2.getMaximumQuantityInBatch());
+        BatchEntity batchEntity3 = batchService.createBatch(randomPlant2, randomPrice / 10,
+            randomPlant2.getMaximumQuantityInBatch());
 
         orderService.addBatchToOrder(orderEntity.getId(), batchEntity1);
         orderService.addBatchToOrder(orderEntity.getId(), batchEntity2);
+        orderService.addBatchToOrder(orderEntity.getId(), batchEntity3);
       }
     }
 

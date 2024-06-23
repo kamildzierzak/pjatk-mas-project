@@ -21,10 +21,10 @@ public class BatchService {
     return batchRepository.findAll();
   }
 
+  @Transactional
   public Page<BatchEntity> getBatchPage(Pageable pageable) {
     return batchRepository.findAllBatchesWithoutShelf(pageable);
   }
-
 
   public Optional<BatchEntity> getBatch(Long id) {
     return batchRepository.findById(id);
@@ -37,6 +37,7 @@ public class BatchService {
     return batchRepository.save(batchEntity);
   }
 
+  @Transactional
   public List<BatchEntity> createBatches(List<BatchEntity> batches) {
     return batchRepository.saveAll(batches);
   }

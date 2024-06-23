@@ -1,5 +1,6 @@
 package mas.ManagementSystem.domain.dto;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class PlantDto {
   private String name;
   private String description;
   private PlantType type;
-
+  private List<BatchDto> batches;
 }

@@ -11,12 +11,10 @@ import org.springframework.stereotype.Component;
 public class ShelfMapper implements Mapper<ShelfEntity, ShelfDto> {
 
   private final ModelMapper modelMapper;
-  private final BatchMapper batchMapper;
 
   public ShelfMapper() {
     this.modelMapper = new ModelMapper();
     configureModelMapper();
-    this.batchMapper = new BatchMapper();
   }
 
   private void configureModelMapper() {

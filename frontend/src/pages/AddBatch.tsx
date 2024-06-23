@@ -184,14 +184,12 @@ export default function AddBatch() {
         Number(selectedBatchQuantity)
       );
 
-      if (response.status !== 200) {
-        toast("Wystąpił błąd podczas dodawania partii", { type: "error" });
-        return;
-      } else {
+      if (response.status === 200) {
         navigate("/batches");
         toast("Partia dodana", { type: "success" });
       }
     } catch (error) {
+      toast("Wystąpił błąd podczas dodawania partii", { type: "error" });
       console.log(error);
     }
 

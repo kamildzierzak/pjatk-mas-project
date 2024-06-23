@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getOrders, moveBatchToShelf } from "../services/orderServices";
 import { getRows } from "../services/rowServices";
+import { toast } from "react-toastify";
 
 export default function AddBatch() {
   const navigate = useNavigate();
@@ -20,11 +21,12 @@ export default function AddBatch() {
   const [batchOptions, setBatchOptions] = useState([]);
   const [rackOptions, setRackOptions] = useState([]);
   const [shelfOptions, setShelfOptions] = useState([]);
+  const [selectedBatchQuantityMaximum, setSelectedBatchQuantityMaximum] =
+    useState(0);
 
   const getAllData = async () => {
     try {
       const { data: orders } = await getOrders();
-      console.log(orders);
 
       const filteredOrders = orders.filter(order => order.content.length > 0);
       const { data: rows } = await getRows();
@@ -68,6 +70,7 @@ export default function AddBatch() {
       selectedPlantName: selectedBatch ? selectedBatch.plantName : "",
       selectedBatchQuantity: selectedBatch ? selectedBatch.quantity : 0,
     });
+    setSelectedBatchQuantityMaximum(selectedBatch ? selectedBatch.quantity : 0);
   };
 
   const handleSelectRow = e => {
@@ -134,18 +137,45 @@ export default function AddBatch() {
       const {
         selectedDelivery,
         selectedBatch,
+        selectedRow,
+        selectedRack,
         selectedShelf,
         selectedPricePerItem,
         selectedBatchQuantity,
       } = formState;
+
+      // Dumb validation
       if (
         selectedDelivery === "Wybierz" ||
         selectedBatch === "Wybierz" ||
-        selectedShelf === "Wybierz" ||
-        selectedPricePerItem === 0
+        selectedRow === "Wybierz" ||
+        selectedRack === "Wybierz" ||
+        selectedShelf === "Wybierz"
       ) {
+        toast(
+          "Pola dostawy, parti, rzędu, regału oraz półki muszą być wybrane.",
+          { type: "error" }
+        );
         return;
       }
+
+      if (selectedPricePerItem == 0 || selectedPricePerItem < 0) {
+        toast("Cena nie może być równa lub mniejsza niż 0", { type: "error" });
+        return;
+      }
+
+      if (
+        selectedBatchQuantity == 0 ||
+        selectedBatchQuantity < 0 ||
+        selectedBatchQuantity > selectedBatchQuantityMaximum
+      ) {
+        toast(
+          "Ilość musi być większa niż 0 oraz mniejsza niż ilość maksymalna na partię danej rośliny.",
+          { type: "error" }
+        );
+        return;
+      }
+
       const response = await moveBatchToShelf(
         Number(selectedDelivery),
         Number(selectedBatch),
@@ -153,14 +183,19 @@ export default function AddBatch() {
         Number(selectedPricePerItem),
         Number(selectedBatchQuantity)
       );
-      navigate("/batches");
-      // TODO Add success toast
-      console.log(response);
+
+      if (response.status !== 200) {
+        toast("Wystąpił błąd podczas dodawania partii", { type: "error" });
+        return;
+      } else {
+        navigate("/batches");
+        toast("Partia dodana", { type: "success" });
+      }
     } catch (error) {
       console.log(error);
     }
 
-    console.log(formState);
+    // console.log(formState);
   };
 
   const handleCancel = () => {

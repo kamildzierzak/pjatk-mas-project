@@ -7,6 +7,8 @@ import {
   BsListTask,
   BsList,
 } from "react-icons/bs";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const mainNavLinks = [
   {
@@ -52,6 +54,7 @@ export default function Layout() {
 
   return (
     <div className="h-full max-w-screen-2xl flex flex-col lg:flex-row mx-auto">
+      <ToastContainer />
       {/* Navigation >= 1024px */}
       {isMenuOpen ? (
         <div className="hidden min-h-lvh lg:flex min-w-64 border-x-2">

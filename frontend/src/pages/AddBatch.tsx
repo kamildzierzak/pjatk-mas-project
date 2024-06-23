@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOrders } from "../services/orderServices";
+import { getOrders, moveBatchToShelf } from "../services/orderServices";
 import { getRows } from "../services/rowServices";
 
 export default function AddBatch() {
@@ -24,8 +24,11 @@ export default function AddBatch() {
   const getAllData = async () => {
     try {
       const { data: orders } = await getOrders();
+      console.log(orders);
+
+      const filteredOrders = orders.filter(order => order.content.length > 0);
       const { data: rows } = await getRows();
-      setDeliveriesData(orders);
+      setDeliveriesData(filteredOrders);
       setRowsData(rows);
     } catch (error) {
       console.log(error);
@@ -124,15 +127,45 @@ export default function AddBatch() {
     });
   };
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = async e => {
     e.preventDefault();
+
+    try {
+      const {
+        selectedDelivery,
+        selectedBatch,
+        selectedShelf,
+        selectedPricePerItem,
+        selectedBatchQuantity,
+      } = formState;
+      if (
+        selectedDelivery === "Wybierz" ||
+        selectedBatch === "Wybierz" ||
+        selectedShelf === "Wybierz" ||
+        selectedPricePerItem === 0
+      ) {
+        return;
+      }
+      const response = await moveBatchToShelf(
+        Number(selectedDelivery),
+        Number(selectedBatch),
+        Number(selectedShelf),
+        Number(selectedPricePerItem),
+        Number(selectedBatchQuantity)
+      );
+      navigate("/batches");
+      // TODO Add success toast
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+
+    console.log(formState);
   };
 
   const handleCancel = () => {
     navigate("/batches");
   };
-
-  const handleAdd = () => {};
 
   useEffect(() => {
     getAllData();
@@ -204,7 +237,7 @@ export default function AddBatch() {
             {rowsData.map(row => {
               return (
                 <option key={row.id} value={row.id}>
-                  {row.id}
+                  {row.name}
                 </option>
               );
             })}
@@ -226,7 +259,7 @@ export default function AddBatch() {
             {rackOptions.map(rack => {
               return (
                 <option key={rack.id} value={rack.id}>
-                  {rack.id}
+                  {rack.number}
                 </option>
               );
             })}
@@ -248,7 +281,7 @@ export default function AddBatch() {
             {shelfOptions.map(shelf => {
               return (
                 <option key={shelf.id} value={shelf.id}>
-                  {shelf.id}
+                  {shelf.number}
                 </option>
               );
             })}
@@ -302,13 +335,14 @@ export default function AddBatch() {
         <div className="w-full flex justify-between">
           <button
             onClick={handleCancel}
-            className="btn bg-accent text-white hover:scale-105"
+            className="btn btn-accent text-white hover:scale-110"
           >
             Anuluj
           </button>
           <button
-            onClick={handleAdd}
-            className="btn bg-primary text-white hover:scale-105"
+            onClick={handleFormSubmit}
+            type="submit"
+            className="btn btn-primary text-white hover:scale-110"
           >
             Dodaj
           </button>

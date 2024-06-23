@@ -47,7 +47,7 @@ export default function Stocks() {
             id="searchBar"
             placeholder=" Szukaj..."
             onChange={search}
-            className="min-w-[250px] max-w-[400px] h-10 p-2 border rounded-lg"
+            className="min-w-[250px] max-w-[400px] h-12 p-2 border rounded-lg"
             disabled={draftState.searchInput}
           />
           <button
@@ -59,16 +59,16 @@ export default function Stocks() {
             Filtry
           </button>
         </div>
-        <div className="max-w-[300px] min-h-10 flex flex-wrap gap-6">
+        <div className="max-w-[300px] min-h-12 flex flex-wrap gap-6">
           <button
-            className={`max-w-[200px] px-4 py-2 rounded-lg bg-primary text-white font-bold ${
+            className={`max-w-[200px] px-4 py-2 btn btn-primary text-white font-bold ${
               draftState.addPlantButton ? "opacity-50" : ""
             }`}
             disabled={true}
           >
             Dodaj roślinę
           </button>
-          <div className="h-10 flex p-1 bg-base-200 rounded-lg">
+          <div className="h-12 flex p-1 bg-base-200 rounded-lg">
             <button
               className={`px-3 py-1 rounded-lg bg-base-100 ${
                 draftState.listButton ? "opacity-50" : ""
@@ -104,20 +104,20 @@ export default function Stocks() {
         )}
       </div>
       {data && data.content?.length > 0 && (
-        <div className="w-full min-h-10 flex justify-center mb-4">
+        <div className="w-full min-h-12 flex justify-center mb-4">
           {data.totalPages > 1 && (
             <div className="flex gap-1 join text-white font-semibold">
               {currentPage !== 0 ? (
                 <button
                   onClick={() => getAllPlants(currentPage - 1)}
-                  className="min-w-24 join-item bg-primary p-2 rounded-lg hover:scale-105"
+                  className="min-w-24 join-item bg-primary p-2 btn btn-primary text-white hover:scale-105"
                 >
                   Poprzednia
                 </button>
               ) : (
                 <button
                   disabled={true}
-                  className="min-w-24 join-item bg-primary opacity-50 p-2 rounded-lg"
+                  className="min-w-24 join-item bg-primary opacity-50 p-2 btn btn-primary text-white"
                 >
                   Poprzednia
                 </button>
@@ -125,14 +125,14 @@ export default function Stocks() {
               {currentPage < data.totalPages - 1 ? (
                 <button
                   onClick={() => getAllPlants(currentPage + 1)}
-                  className="min-w-24 join-item bg-primary p-2 rounded-lg hover:scale-105"
+                  className="min-w-24 join-item bg-primary p-2 btn btn-primary text-white hover:scale-105"
                 >
                   Następna
                 </button>
               ) : (
                 <button
                   disabled={true}
-                  className="min-w-24 join-item bg-primary opacity-50 p-2 rounded-lg"
+                  className="min-w-24 join-item bg-primary opacity-50 p-2 btn btn-primary text-white"
                 >
                   Następna
                 </button>

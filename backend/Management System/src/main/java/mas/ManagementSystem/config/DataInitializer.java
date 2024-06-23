@@ -249,11 +249,9 @@ public class DataInitializer {
 //      Orders
     if (orderService.getNumberOfOrder() == 0) {
       List<PlantEntity> plants = plantService.getPlants();
-      List<OrderEntity> orders = new ArrayList<>();
       Random random = new Random();
 
       for (int i = 1; i <= 10; i++) {
-        List<BatchEntity> batches = new ArrayList<>();
         PlantEntity randomPlant1 = plants.get(random.nextInt(plants.size()));
         PlantEntity randomPlant2 = plants.get(random.nextInt(plants.size()));
         Double randomPrice = Double.valueOf(Math.round(i * Math.random() * 10000));
@@ -268,8 +266,8 @@ public class DataInitializer {
         orderService.addBatchToOrder(orderEntity.getId(), batchEntity1);
         orderService.addBatchToOrder(orderEntity.getId(), batchEntity2);
       }
-
     }
+
   }
 
 }

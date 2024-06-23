@@ -78,7 +78,8 @@ public class OrderService {
   }
 
   @Transactional
-  public void moveBatchFromOrderToShelf(Long orderId, Long batchId, Long shelfId) {
+  public void moveBatchFromOrderToShelf(Long orderId, Long batchId, Long shelfId,
+      Double pricePerItem, Integer quantity) {
     OrderEntity orderEntity = orderRepository.findById(orderId)
         .orElseThrow(() -> new RuntimeException("Order not found"));
     BatchEntity batchEntity =
@@ -91,6 +92,10 @@ public class OrderService {
       throw new RuntimeException("Shelf is not empty!");
     }
 
+    batchEntity.setOrderEntity(null);
+    batchEntity.setPricePerItem(pricePerItem);
+    batchEntity.setQuantity(quantity);
+    batchEntity.setShelfEntity(shelfEntity);
     shelfEntity.setBatchEntity(batchEntity);
     orderEntity.getContent().remove(batchEntity);
     shelfRepository.save(shelfEntity);

@@ -234,7 +234,7 @@ public class DataInitializer {
       List<BatchEntity> batches = new ArrayList<>();
       Random random = new Random();
 
-      for (int i = 1; i <= 100; i++) {
+      for (int i = 1; i <= 50; i++) {
         PlantEntity randomPlant = plants.get(random.nextInt(plants.size()));
         Double randomPrice = Double.valueOf(Math.round(i * Math.random() * 100));
 

@@ -30,6 +30,7 @@ export default function AddBatch() {
 
       const filteredOrders = orders.filter(order => order.content.length > 0);
       const { data: rows } = await getRows();
+
       setDeliveriesData(filteredOrders);
       setRowsData(rows);
     } catch (error) {
@@ -226,7 +227,8 @@ export default function AddBatch() {
             {deliveriesData.map(delivery => {
               return (
                 <option key={delivery.id} value={delivery.id}>
-                  {delivery.id}
+                  {delivery.id} [
+                  {delivery.content.map(batch => batch.plantName + ", ")}]
                 </option>
               );
             })}
@@ -248,7 +250,7 @@ export default function AddBatch() {
             {batchOptions.map(batch => {
               return (
                 <option key={batch.id} value={batch.id}>
-                  {batch.id}
+                  {batch.id} {batch.plantName}
                 </option>
               );
             })}

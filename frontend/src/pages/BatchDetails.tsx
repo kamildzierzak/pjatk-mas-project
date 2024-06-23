@@ -20,7 +20,7 @@ export default function BatchDetails() {
   return (
     <div className="flex flex-col gap-8">
       <h1 className="h-20 text-2xl font-bold py-6">Partia</h1>
-      <div>{batchId && <div>{batchId}</div>}</div>
+      <div>{batchId && <div>Partia {batchId} TODO TODO</div>}</div>
     </div>
   );
 }

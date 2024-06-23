@@ -3,9 +3,10 @@ import { BsFunnel, BsListUl, BsGrid } from "react-icons/bs";
 import BatchListElement from "../components/ui/BatchListElement";
 import { getBatches } from "../services/batchService";
 import { useNavigate } from "react-router-dom";
+import { debounce } from "lodash";
 
 const draftState = {
-  searchInput: true,
+  searchButton: true,
   filterButton: true,
   listButton: true,
   gridButton: true,
@@ -13,8 +14,9 @@ const draftState = {
 
 export default function Batches() {
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
+  const [unfilteredData, setUnfilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [search, setSearch] = useState("");
 
   const getAllBatches = async (page = 0, size = 10) => {
     try {
@@ -22,15 +24,19 @@ export default function Batches() {
 
       const { data } = await getBatches(page, size);
 
-      setData(data);
+      setUnfilteredData(data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // TODO: Implement search plants
-  const search = () => {
-    console.log("Implement search plants");
+  const debounceSearch = debounce(searchQuery => {
+    setSearch(searchQuery);
+  }, 500);
+
+  const handleSearch = async e => {
+    debounceSearch(e.target.value);
+    console.log(search);
   };
 
   // TODO: Implement validation before navigating to /batches/create
@@ -40,6 +46,7 @@ export default function Batches() {
     navigate("/batches/create");
   };
 
+  // For getting all batches
   useEffect(() => {
     getAllBatches();
   }, []);
@@ -54,9 +61,9 @@ export default function Batches() {
             name="search"
             id="searchBar"
             placeholder=" Szukaj..."
-            onChange={search}
+            disabled={draftState.searchButton}
+            onChange={handleSearch}
             className="min-w-[250px] max-w-[400px] h-12 p-2 border rounded-lg"
-            disabled={draftState.searchInput}
           />
           <button
             className={`flex items-center gap-3 p-2 border rounded-lg ${
@@ -93,7 +100,7 @@ export default function Batches() {
         </div>
       </div>
       <div>
-        {data && data.content?.length > 0 ? (
+        {unfilteredData && unfilteredData.content?.length > 0 ? (
           <ul className="flex flex-col gap-3">
             <li className="hidden w-full min-h-14 lg:flex flex-row gap-5 p-4 ">
               <span className="font-bold min-w-10 ">ID</span>
@@ -105,7 +112,7 @@ export default function Batches() {
               <span className="font-bold min-w-12">Półka</span>
               <span className="font-bold min-w-16">Ilość</span>
             </li>
-            {data.content?.map(batch => {
+            {unfilteredData.content?.map(batch => {
               return <BatchListElement key={batch.id} batch={batch} />;
             })}
           </ul>
@@ -113,9 +120,9 @@ export default function Batches() {
           <p>Brak roślin w bazie danych</p>
         )}
       </div>
-      {data && data.content?.length > 0 && (
+      {unfilteredData && unfilteredData.content?.length > 0 && (
         <div className="w-full min-h-12 flex justify-center mb-4">
-          {data.totalPages > 1 && (
+          {unfilteredData.totalPages > 1 && (
             <div className="flex gap-1 join text-white font-semibold">
               {currentPage !== 0 ? (
                 <button
@@ -132,7 +139,7 @@ export default function Batches() {
                   Poprzednia
                 </button>
               )}
-              {currentPage < data.totalPages - 1 ? (
+              {currentPage < unfilteredData.totalPages - 1 ? (
                 <button
                   onClick={() => getAllBatches(currentPage + 1)}
                   className="min-w-24 join-item btn btn-primary text-white p-2 hover:scale-105"
